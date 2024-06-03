@@ -12,7 +12,7 @@ const MapsProvider = ({ children }) => {
   const [locationGranted, setLocationGranted] = useState(false);
   const [currentLocationOn, setCurrentLocationOn] = useState(false);
   const [currentLocation, setCurrentLocation] = useState("");
-  // Add any other states you need here
+  const [permissionPrompt, setPermissionPrompt] = useState(false);
 
   // Set User current location =================================================
 
@@ -60,8 +60,15 @@ const MapsProvider = ({ children }) => {
               setLocationGranted(false);
               setCurrentLocationOn(false);
               setSearchLocation("");
+              alert(
+                "This application needs access to your location. Please allow location access."
+              );
             } else if (permissionStatus.state === "prompt") {
               console.log("Geolocation permission prompt is required.");
+              setPermissionPrompt(true);
+              alert(
+                "This application needs access to your location. Please allow location access."
+              );
             }
 
             // Listen for changes to the permission status

@@ -27,14 +27,14 @@ class Place(db.Model):
 
 
 
-    def to_dict(self):
+    def to_dict(self, include_reviews = False):
         state = instance_state(self)
 
         place_dict = {
             'id': self.id,
             'editorialSummary': self.editorialSummary,
-            'name': self.name,
-            'types': self.primaryType,
+            'displayName': self.displayName,
+            'types': self.types,
             'formattedAddress': self.formattedAddress,
             'lat': self.lat,
             'lng': self.lng,
@@ -44,7 +44,7 @@ class Place(db.Model):
             'created_at': self.created_at,
             'updated_at': self.updated_at,
         }
-        if 'reviews' in state.dict:
+        if(include_reviews):
             place_dict['review'] = [rev.to_dict() for rev in self.review] if self.review else None
 
         return place_dict

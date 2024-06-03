@@ -5,6 +5,7 @@ import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
 import { MapsProvider } from "../context/mapsContext";
+import LocationPromptModal from "../components/LocationPromptModal";
 
 export default function Layout() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ export default function Layout() {
       <ModalProvider>
         <MapsProvider>
           <Navigation />
+          <LocationPromptModal />
           {isLoaded && <Outlet />}
           <Modal />
         </MapsProvider>

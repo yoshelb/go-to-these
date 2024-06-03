@@ -16,31 +16,64 @@ const MapsProvider = ({ children }) => {
 
   // Set User current location =================================================
 
-  useEffect(() => {
-    if (locationGranted) {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          (position) => {
-            const { latitude, longitude } = position.coords;
-            const request = {
-              locationRestriction: {
-                west: longitude - 0.05,
-                north: latitude + 0.05,
-                east: longitude + 0.05,
-                south: latitude - 0.05,
-              },
-              origin: { lat: latitude, lng: longitude },
-            };
-            setCurrentLocation(request);
-            console.log("CURRENT LOCATION", request);
-          },
-          (error) => {
-            console.error("Error fetching geolocation:", error);
-          }
-        );
-      }
+  // useEffect(() => {
+  //   if (locationGranted) {
+  //     if (navigator.geolocation) {
+  //       navigator.geolocation.getCurrentPosition(
+  //         (position) => {
+  //           const { latitude, longitude } = position.coords;
+  //           const request = {
+  //             locationRestriction: {
+  //               west: longitude - 0.05,
+  //               north: latitude + 0.05,
+  //               east: longitude + 0.05,
+  //               south: latitude - 0.05,
+  //             },
+  //             origin: { lat: latitude, lng: longitude },
+  //           };
+  //           setCurrentLocation(request);
+  //           console.log("CURRENT LOCATION", request);
+  //         },
+  //         (error) => {
+  //           console.error("Error fetching geolocation:", error);
+  //         }
+  //       );
+  //     }
+  //   }
+  // }, [locationGranted]);
+
+  const requestGeolocationPermission = () => {
+    if (navigator.geolocation) {
+      console.log("Requesting geolocation permission...");
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const { latitude, longitude } = position.coords;
+          const request = {
+            locationRestriction: {
+              west: longitude - 0.05,
+              north: latitude + 0.05,
+              east: longitude + 0.05,
+              south: latitude - 0.05,
+            },
+            origin: { lat: latitude, lng: longitude },
+          };
+          setCurrentLocation(request);
+          console.log("CURRENT LOCATION", request);
+          setLocationGranted(true);
+          setCurrentLocationOn(true);
+          setPermissionPrompt(false); // Hide prompt if location is granted
+        },
+        (error) => {
+          console.error("Error fetching geolocation:", error);
+          setLocationGranted(false);
+          setCurrentLocationOn(false);
+          setPermissionPrompt(true); // Show prompt if location access is denied
+        }
+      );
+    } else {
+      console.log("Geolocation is not supported by this browser.");
     }
-  }, [locationGranted]);
+  };
 
   //   Check User Location Permission =============================================================
 
@@ -152,6 +185,9 @@ const MapsProvider = ({ children }) => {
         setCurrentLocationOn,
         currentLocation,
         setCurrentLocation,
+        setPermissionPrompt,
+        permissionPrompt,
+        requestGeolocationPermission,
       }}
     >
       {googleMapsReady && children}

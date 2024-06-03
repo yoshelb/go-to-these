@@ -9,36 +9,39 @@ function LoginFormModal() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
-  const [demoSubmit, setDemoSubmit] = useState(false)
+  const [demoSubmit, setDemoSubmit] = useState(false);
   const { closeModal } = useModal();
 
-  const handleSubmit = useCallback(async (e) => {
-    e?.preventDefault();
+  const handleSubmit = useCallback(
+    async (e) => {
+      e?.preventDefault();
+      console.log("RENDER IS DUMB");
+      const serverResponse = await dispatch(
+        thunkLogin({
+          email,
+          password,
+        })
+      );
 
-    const serverResponse = await dispatch(
-      thunkLogin({
-        email,
-        password,
-      })
-    );
-
-    if (serverResponse) {
-      setErrors(serverResponse);
-    } else {
-      closeModal();
-    }
-  }, [dispatch, email, password, closeModal]);
+      if (serverResponse) {
+        setErrors(serverResponse);
+      } else {
+        closeModal();
+      }
+    },
+    [dispatch, email, password, closeModal]
+  );
 
   const handleDemoSubmit = () => {
-    setEmail('demo@aa.io')
-    setPassword('password')
-    setDemoSubmit(true)
-  }
+    setEmail("demo@aa.io");
+    setPassword("password");
+    setDemoSubmit(true);
+  };
   useEffect(() => {
-    if(demoSubmit) {
-      handleSubmit()
+    if (demoSubmit) {
+      handleSubmit();
     }
-  }, [demoSubmit, handleSubmit])
+  }, [demoSubmit, handleSubmit]);
 
   return (
     <>
@@ -65,7 +68,9 @@ function LoginFormModal() {
         </label>
         {errors.password && <p>{errors.password}</p>}
         <button type="submit">Log In</button>
-        <button type="button" onClick={handleDemoSubmit}>Demo User</button>
+        <button type="button" onClick={handleDemoSubmit}>
+          Demo User
+        </button>
       </form>
     </>
   );

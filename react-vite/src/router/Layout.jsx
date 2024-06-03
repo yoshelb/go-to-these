@@ -4,10 +4,12 @@ import { useDispatch } from "react-redux";
 import { ModalProvider, Modal } from "../context/Modal";
 import { thunkAuthenticate } from "../redux/session";
 import Navigation from "../components/Navigation/Navigation";
+import { MapsProvider } from "../context/mapsContext";
 
 export default function Layout() {
   const dispatch = useDispatch();
   const [isLoaded, setIsLoaded] = useState(false);
+
   useEffect(() => {
     dispatch(thunkAuthenticate()).then(() => setIsLoaded(true));
   }, [dispatch]);
@@ -15,9 +17,11 @@ export default function Layout() {
   return (
     <>
       <ModalProvider>
-        <Navigation />
-        {isLoaded && <Outlet />}
-        <Modal />
+        <MapsProvider>
+          <Navigation />
+          {isLoaded && <Outlet />}
+          <Modal />
+        </MapsProvider>
       </ModalProvider>
     </>
   );

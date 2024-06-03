@@ -1,8 +1,8 @@
-"""updated Types on place
+"""updated user to not need names
 
-Revision ID: 961d003fba95
+Revision ID: 6fd80d0ae48e
 Revises:
-Create Date: 2024-06-02 23:17:29.119756
+Create Date: 2024-06-03 11:35:08.132470
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '961d003fba95'
+revision = '6fd80d0ae48e'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -39,8 +39,8 @@ def upgrade():
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=40), nullable=False),
-    sa.Column('first_name', sa.String(length=25), nullable=False),
-    sa.Column('last_name', sa.String(length=25), nullable=False),
+    sa.Column('first_name', sa.String(length=25), nullable=True),
+    sa.Column('last_name', sa.String(length=25), nullable=True),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('created_at', sa.DateTime(), nullable=True),

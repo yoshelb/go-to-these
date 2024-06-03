@@ -88,6 +88,7 @@ const MapsProvider = ({ children }) => {
               console.log("Geolocation permission granted.");
               setLocationGranted(true);
               setCurrentLocationOn(true);
+              requestGeolocationPermission();
             } else if (permissionStatus.state === "denied") {
               console.log("Geolocation permission denied.");
               setLocationGranted(false);
@@ -110,6 +111,27 @@ const MapsProvider = ({ children }) => {
               console.log(
                 "Geolocation permission status changed to: " + this.state
               );
+              if (this.state === "granted") {
+                console.log("Geolocation permission granted.");
+                setLocationGranted(true);
+                setCurrentLocationOn(true);
+                requestGeolocationPermission();
+              } else if (this.state === "denied") {
+                console.log("Geolocation permission denied.");
+                setLocationGranted(false);
+                setCurrentLocationOn(false);
+                setSearchLocation("");
+                setPermissionPrompt(false);
+                // alert(
+                //   "This application needs access to your location. Please allow location access."
+                // );
+              } else if (this.state === "prompt") {
+                console.log("Geolocation permission prompt is required.");
+                setPermissionPrompt(true);
+                // alert(
+                //   "This application needs access to your location. Please allow location access."
+                // );
+              }
             };
           })
           .catch((error) => {

@@ -93,7 +93,7 @@ const MapsProvider = ({ children }) => {
               setLocationGranted(false);
               setCurrentLocationOn(false);
               setSearchLocation("");
-              setPermissionPrompt(true);
+              setPermissionPrompt(false);
               alert(
                 "This application needs access to your location. Please allow location access."
               );

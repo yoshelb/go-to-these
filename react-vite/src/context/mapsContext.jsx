@@ -80,9 +80,8 @@ const MapsProvider = ({ children }) => {
     }
   }, [googleMapsReady]);
 
-
   //   LOAD GOOGLE MAPS ================================================================
-// =====================================================================================================
+  // =====================================================================================================
 
   useEffect(() => {
     // Define the callback function that the Google Maps API will call
@@ -131,7 +130,7 @@ const MapsProvider = ({ children }) => {
         // Handle script load error
         console.error("Failed to load Google Maps script:", error);
       });
-  });
+  }, [apiKey]);
 
   return (
     <MapsContext.Provider

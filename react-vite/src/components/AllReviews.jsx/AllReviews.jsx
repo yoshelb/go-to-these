@@ -3,13 +3,15 @@ import ReviewCard from "./ReviewCard";
 import { thunkUserReviews } from "../../redux/reviews";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
+import "./allReviews.css";
 
 function AllReviews() {
   const dispatch = useDispatch();
   let reviewsArr = useSelector((state) => state.reviews.userReviews);
   let isLoaded = useSelector((state) => state.reviews.isLoaded);
+
   if (reviewsArr) {
-    console.log("REVIEWS ARR IN ALL REVIEWS", reviewsArr);
+    reviewsArr.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
   }
 
   useEffect(() => {
@@ -20,13 +22,15 @@ function AllReviews() {
   return (
     reviewsArr &&
     isLoaded && (
-      <div>
+      <div className="gallery-container">
         {console.log("INSIDE MAP")}
         <h1>All Reviews</h1>
-        {reviewsArr &&
-          reviewsArr.map((review) => (
-            <ReviewCard key={review.spot_id} review={review} />
-          ))}
+        <div className="gallery">
+          {reviewsArr &&
+            reviewsArr.map((review) => (
+              <ReviewCard key={review.spot_id} review={review} />
+            ))}
+        </div>
       </div>
     )
   );

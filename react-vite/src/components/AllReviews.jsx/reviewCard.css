@@ -1,0 +1,12 @@
+.shop-image {
+  /* position: absolute; */
+  width: 200px;
+  height: 200px;
+  padding-bottom: calc(100% - 2px);
+  background-size: cover;
+  background-position: center;
+  border-radius: 2em;
+  box-sizing: border-box;
+  background-color: grey;
+  /* z-index: 0, */
+}

@@ -23,7 +23,6 @@ function AllReviews() {
     reviewsArr &&
     isLoaded && (
       <div className="gallery-container">
-        {console.log("INSIDE MAP")}
         <h1>All Reviews</h1>
         <div className="gallery">
           {reviewsArr &&

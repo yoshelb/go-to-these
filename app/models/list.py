@@ -22,7 +22,7 @@ class List(db.Model):
 
     list_review = db.relationship('List_Review', back_populates='list', cascade='all, delete-orphan') #one to many and delete list in reviews_list if list is deleted
 
-    def to_dict(self):
+    def to_dict(self, include_reviews=False):
         state = instance_state(self)
 
         list_dict = {
@@ -36,6 +36,9 @@ class List(db.Model):
         }
         if 'users' in state.dict:
             list_dict['user'] = self.user.to_dict() if self.user else None
+
+        if(include_reviews):
+            list_dict["reviews"] = [list_review.review.to_dict(include_place=True) for list_review in self.list_review]
 
         return list_dict
 # how can I get every review back that belongs with a particular list? Maybe that's a good reason to do a join table? need to look that up.

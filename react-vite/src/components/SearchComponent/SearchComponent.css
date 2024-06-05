@@ -6,9 +6,9 @@
 }
 
 .search-wrapper {
-  height: 400px;
-  width: 400px;
-  margin-bottom: 50px;
+  height: 350px;
+  width: 500px;
+  /* margin-bottom: 50px; */
   box-sizing: border-box;
   display: flex;
   justify-content: flex-start;

@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import HomePage from "../components/HomePage/index.js";
 import CreateAReviewPage from "../components/CreateAReviewPage";
 import SingleReviewPage from "../components/SingleReviewPage";
+import ListDetailPage from "../components/ListDetailPage/ListDetailPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
         path: "/reviews/:reviewId",
         element: <SingleReviewPage />,
       },
+      {
+        path:"/lists/:listId",
+        element: <ListDetailPage/>
+      }
     ],
   },
 ]);

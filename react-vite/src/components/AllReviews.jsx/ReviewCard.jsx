@@ -1,12 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import "./reviewCard.css";
 import { IoIosStar, IoIosStarOutline } from "react-icons/io";
 
 function ReviewCard({ review }) {
-  console.log("REVIEW IN REVIEWCARD: ====>", review);
+  const navigate = useNavigate();
 
   return (
     review && (
-      <div>
+      <div
+        style={{ cursor: "pointer" }}
+        onClick={() => navigate(`/reviews/${review.id}`)}
+      >
         <div
           className="shop-image"
           style={{ backgroundImage: `url("${review.place.previewImage}")` }}

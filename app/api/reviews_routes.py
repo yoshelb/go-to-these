@@ -45,14 +45,28 @@ def get_review_by_reviewid(review_id):
      return jsonify({"error": "Could not find review"}), 400
 
 
+#Update Review
+@reviews_routes.route("/<review_id>/update", methods=['PUT'])
+@login_required
+def update_review(review_id):
+    body = request.get_json()
+    review_to_update = Review.query.get_or_404(review_id)
+    review_to_update.review = body["review"]
+    review_to_update.rating = body['rating']
+
+
+    db.session.commit()
+
+    return jsonify("updated"), 200
+
 
 # Create Review and Place
 @reviews_routes.route("/create", methods=['POST'])
 @login_required
 def create_review_and_place():
-    print('HELLO FROM CREATE ROUTE')
+
     body = request.get_json()
-    print("BODY IN ROUTE", body)
+    # print("BODY IN ROUTE", body)
 
     try:
         selected_place = body['selectedPlace']
@@ -111,3 +125,13 @@ def create_review_and_place():
     except Exception as e:
         print(f"Error: {e}")
         return jsonify({"error": "An error occurred"}), 500
+
+#DELETE REVIEW
+
+@reviews_routes.route("/<review_id>/delete", methods=['DELETE'])
+@login_required
+def deleteReview(review_id):
+   review_to_delete = Review.query.get_or_404(review_id)
+   db.session.delete(review_to_delete)
+   db.session.commit()
+   return jsonify("sucessfully deleted"), 200

@@ -13,7 +13,7 @@ const StarsRating = ({ setRating, rating }) => {
           onMouseLeave={() => setActiveRating(0)}
           onClick={() => setRating(num)}
         >
-          {activeRating >= num || rating >= num ? (
+          {activeRating > num - 1 || rating > num - 1 ? (
             <IoIosStar className="custom-icon" />
           ) : (
             <IoIosStarOutline className="custom-icon" />

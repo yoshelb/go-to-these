@@ -1,11 +1,12 @@
 .preview-img-container {
   max-height: 500px;
   max-width: 500px;
-  position: relative;
+  width: 100%;
+  /* position: relative; */
 }
 
 .preview-img {
-  position: absolute;
+  /* position: absolute; */
   height: 100%;
   width: 100%;
   /* height: 100%; */
@@ -15,4 +16,10 @@
   border-radius: 2em;
   box-sizing: border-box;
   background-color: grey;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

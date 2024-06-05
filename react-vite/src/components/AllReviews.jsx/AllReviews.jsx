@@ -2,7 +2,7 @@
 import ReviewCard from "./ReviewCard";
 import { thunkUserReviews } from "../../redux/reviews";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import "./allReviews.css";
 
 function AllReviews() {
@@ -16,7 +16,7 @@ function AllReviews() {
 
   useEffect(() => {
     console.log("USE EFTECT RUNNING");
-    dispatch(thunkUserReviews()).then();
+    dispatch(thunkUserReviews());
   }, [dispatch]);
 
   return (

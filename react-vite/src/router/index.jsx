@@ -1,8 +1,10 @@
-import { createBrowserRouter } from 'react-router-dom';
-import LoginFormPage from '../components/LoginFormPage';
-import SignupFormPage from '../components/SignupFormPage';
-import Layout from './Layout';
-import HomePage from '../components/HomePage';
+import { createBrowserRouter } from "react-router-dom";
+import LoginFormPage from "../components/LoginFormPage";
+import SignupFormPage from "../components/SignupFormPage";
+import Layout from "./Layout";
+import HomePage from "../components/HomePage/index.js";
+import CreateAReviewPage from "../components/CreateAReviewPage";
+import SingleReviewPage from "../components/SingleReviewPage";
 
 export const router = createBrowserRouter([
   {
@@ -10,7 +12,7 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <HomePage/>,
+        element: <HomePage />,
       },
       {
         path: "login",
@@ -20,9 +22,17 @@ export const router = createBrowserRouter([
         path: "signup",
         element: <SignupFormPage />,
       },
-       {
+      {
         path: "signup",
         element: <SignupFormPage />,
+      },
+      {
+        path: "/reviews/create",
+        element: <CreateAReviewPage />,
+      },
+      {
+        path: "/reviews/:reviewId",
+        element: <SingleReviewPage />,
       },
     ],
   },

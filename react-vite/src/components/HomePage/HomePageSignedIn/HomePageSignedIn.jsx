@@ -1,11 +1,11 @@
 import { useSelector } from "react";
-import AllReviews from "../../AllReviews.jsx";
+import AllReviews from "../../AllReviews.jsx/AllReviews.jsx";
 import SearchComponent from "../../SearchComponent/SearchComponent.jsx";
+import { Outlet } from "react-router-dom";
 
 function HomePageSignedIn({ sessionUser }) {
   return (
     <main>
-      <h1>Welcome to Signed in Home Page</h1>
       <SearchComponent />
       <AllReviews />
     </main>

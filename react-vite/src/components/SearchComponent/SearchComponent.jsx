@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { useMapsContext } from "../../context/mapsContext";
 import LocationAutoComplete from "./LocationAutoComplete";
 import AutocompleteSearch from "./AutocompleteSearch";
 
 function SearchComponent() {
-  const [selectedPlace, setSelectedPlace] = useState(null);
   const [previewImageUrl, setPreviewImageUrl] = useState("");
   const apiKey = import.meta.env.VITE_GOOGLE_API_KEY;
   const {
@@ -16,6 +15,8 @@ function SearchComponent() {
     setCurrentLocationOn,
     currentLocation,
     setCurrentLocation,
+    selectedPlace,
+    setSelectedPlace,
   } = useMapsContext();
 
   const handlePlaceSelected = (place) => {
@@ -45,27 +46,6 @@ function SearchComponent() {
           setPreviewImageUrl={setPreviewImageUrl}
           previewImageUrl={previewImageUrl}
         />
-        {selectedPlace && (
-          <div>
-            {console.log("SELECTED PLACE", selectedPlace)}
-            <h2>{selectedPlace.displayName}</h2>
-            {previewImageUrl && <img src={previewImageUrl} />}
-            <p>{selectedPlace.formatted_address}</p>
-            {selectedPlace.editorialSummary && (
-              <p>{selectedPlace.editorialSummary}</p>
-            )}
-            {selectedPlace.websiteURI && (
-              <a href={selectedPlace.websiteURI} target="blank">
-                Website
-              </a>
-            )}
-            {selectedPlace.googleMapsURI && (
-              <a href={selectedPlace.googleMapsURI} target="blank">
-                Google Maps
-              </a>
-            )}
-          </div>
-        )}
       </div>
     )
   );

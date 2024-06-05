@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const AutocompleteSearch = ({
   searchLocation,
@@ -14,6 +15,7 @@ const AutocompleteSearch = ({
   const resultsRef = useRef(null);
   //    const [request, setRequest] = useState('')
   const [disabled, setDisabled] = useState(true);
+  const navigate = useNavigate();
 
   let token;
   useEffect(() => {
@@ -62,7 +64,7 @@ const AutocompleteSearch = ({
       includedPrimaryTypes: ["establishment"],
       language: "en-US",
     };
-    console.log("request from search", request);
+    // console.log("request from search", request);
 
     // Add the latest char sequence to the request.
     request.input = event.target.value;
@@ -115,21 +117,18 @@ const AutocompleteSearch = ({
     let placeText = document.createTextNode(
       `${place.displayName}: ${place.formattedAddress}`
     );
-
+    const placeObj = JSON.parse(JSON.stringify(place));
     if (place.photos && place.photos.length > 0) {
       const url = place.photos[0].getURI({ maxWidth: 800, maxHeight: 800 });
-      console.log("PREVIEW IMAGE", url);
-      setPreviewImageUrl(url);
+      placeObj.previewImageUrl = url;
     }
-    const placeObj = JSON.parse(JSON.stringify(place));
-    setSelectedPlace(placeObj);
-    console.log("PLACE OBJ", placeObj);
-    const latitude = placeObj.location.lat;
-    const longitude = placeObj.location.lng;
 
-    resultsRef.current.replaceChildren(placeText);
-    titleRef.current.innerText = "Selected Place:";
-    inputRef.current.value = "";
+    setSelectedPlace(placeObj);
+    return navigate("/reviews/create");
+
+    // resultsRef.current.replaceChildren(placeText);
+    // titleRef.current.innerText = "Selected Place:";
+    // inputRef.current.value = "";
     // request = await refreshToken(request);
   }
 

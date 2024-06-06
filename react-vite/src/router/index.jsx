@@ -45,6 +45,14 @@ export const router = createBrowserRouter([
         path: "/lists/:listId/delete",
         element: <DeleteListPage />,
       },
+      {
+        path: "/signup",
+        element: <SignupFormPage />,
+      },
+      {
+        path: "/login",
+        element: <LoginFormPage />,
+      },
     ],
   },
 ]);

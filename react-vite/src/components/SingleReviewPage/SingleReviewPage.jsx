@@ -51,7 +51,7 @@ function SingleReviewPage() {
       {isLoading && review && (
         <>
           <div className="main-container">
-            <h1>Review for {review.place.displayName}</h1>
+            <h1>{review.place.displayName}</h1>
             {review.place.previewImage && (
               <div className="preview-img-container">
                 <div

@@ -46,6 +46,7 @@ function ListDetailPage() {
         <div>
           <div>
             <h1>{list.name}</h1>
+            <p>{list.description}</p>
             <button onClick={() => setEditMode(!editMode)}>
               {editMode ? "Finished Editing" : "Edit List"}
             </button>
@@ -57,16 +58,20 @@ function ListDetailPage() {
                 <h3>Add a Spot</h3>
               </div>
               {list.reviews &&
-                list.reviews.map((review) => (
-                  <div key={review.spot_id}>
-                    <ReviewCard review={review} />
-                    {editMode && (
-                      <button onClick={() => removeFromList(review.id)}>
-                        Remove from list
-                      </button>
-                    )}
-                  </div>
-                ))}
+                list.reviews
+                  .sort(
+                    (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+                  )
+                  .map((review) => (
+                    <div key={review.spot_id}>
+                      <ReviewCard review={review} />
+                      {editMode && (
+                        <button onClick={() => removeFromList(review.id)}>
+                          Remove from list
+                        </button>
+                      )}
+                    </div>
+                  ))}
             </div>
           </div>
         </div>

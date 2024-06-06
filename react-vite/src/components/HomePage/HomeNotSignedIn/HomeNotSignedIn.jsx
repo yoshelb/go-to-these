@@ -1,21 +1,17 @@
 import OpenModalButton from "../../OpenModalButton";
 import LoginFormModal from "../../LoginFormModal";
-import SignUpFormModal from "../../SignupFormModal";
+import { useNavigate } from "react-router-dom";
+
 
 function HomeNotSignedIn() {
+    const navigate = useNavigate()
   return (
     <main className="main-container ">
       <h1>
         Start collecting places you want to remember and sharing with friends
       </h1>
-      <OpenModalButton
-        modalComponent={<LoginFormModal />}
-        buttonText="Log in"
-      />
-      <OpenModalButton
-        modalComponent={<SignUpFormModal />}
-        buttonText="Sign up"
-      />
+      <button onClick={() => navigate("/login")}>Sign Up</button>
+      <button onClick={() => navigate("/signup")}>Sign Up</button>
     </main>
   );
 }

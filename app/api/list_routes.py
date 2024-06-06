@@ -34,3 +34,14 @@ def get_list_by_id(list_id):
     else:
         list_dict = list.to_dict(include_reviews=True)
         return jsonify(list_dict), 200
+
+
+# Edit list by Deleting a REVIEW
+@list_routes.route("/<list_id>/reviews/<review_id>/delete", methods=['DELETE'])
+@login_required
+def remove_review_from_list(list_id, review_id):
+    list_review_to_remove = List_Review.query.filter_by(review_id=review_id, list_id = list_id).first()
+    if(list_review_to_remove):
+        db.session.delete(list_review_to_remove)
+        db.session.commit()
+        return jsonify("sucessfully removed"), 200

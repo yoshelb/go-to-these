@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 function AllLists() {
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
   let listsArr = useSelector((state) => state.lists.userLists);
   let isLoaded = useSelector((state) => state.lists.isLoaded);
 

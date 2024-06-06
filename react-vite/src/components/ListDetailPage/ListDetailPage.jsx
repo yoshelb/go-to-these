@@ -14,27 +14,46 @@ function ListDetailPage() {
   const [editMode, setEditMode] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
 
+  const fetchReview = async () => {
+    try {
+      const response = await fetch(`/api/lists/${listId}`);
+      if (!response.ok) {
+        throw new Error(response.error);
+      }
+      const data = await response.json();
+      setList(data);
+      if (sessionUser.id != data.user_id) navigate("/");
+      setIsLoading(true);
+    } catch (error) {
+      console.error("Error fetching review:", error);
+    }
+  };
+
   useEffect(() => {
     setIsLoading(false);
     // Fetch the review data based on the review ID
+    fetchReview();
+  }, [listId, sessionUser, navigate]);
 
-    const fetchReview = async () => {
+  const removeFromList = (review_id) => {
+    const removeReview = async () => {
       try {
-        const response = await fetch(`/api/lists/${listId}`);
+        const response = await fetch(
+          `/api/lists/${listId}/reviews/${review_id}/delete`,
+          {
+            method: "DELETE",
+          }
+        );
         if (!response.ok) {
           throw new Error(response.error);
         }
-        const data = await response.json();
-        setList(data);
-        if (sessionUser.id != data.user_id) navigate("/");
-        setIsLoading(true);
+        await fetchReview();
       } catch (error) {
         console.error("Error fetching review:", error);
       }
     };
-
-    fetchReview();
-  }, [listId, sessionUser, navigate]);
+    removeReview();
+  };
   return sessionUser ? (
     <div>
       <SearchComponent />
@@ -50,7 +69,11 @@ function ListDetailPage() {
                 list.reviews.map((review) => (
                   <div key={review.spot_id}>
                     <ReviewCard review={review} />
-                    {editMode && <button>Remove from list</button>}
+                    {editMode && (
+                      <button onClick={() => removeFromList(review.id)}>
+                        Remove from list
+                      </button>
+                    )}
                   </div>
                 ))}
             </div>

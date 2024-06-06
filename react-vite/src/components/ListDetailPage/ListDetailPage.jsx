@@ -44,7 +44,7 @@ function ListDetailPage() {
     <div>
       {isLoading && list && (
         <div>
-          <div className="gallery-container">
+          <div>
             <h1>{list.name}</h1>
             <button onClick={() => setEditMode(!editMode)}>
               {editMode ? "Finished Editing" : "Edit List"}

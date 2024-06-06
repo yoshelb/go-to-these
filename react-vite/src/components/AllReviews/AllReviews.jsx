@@ -23,14 +23,13 @@ function AllReviews({ listId }) {
     reviewsArr &&
     isLoaded && (
       <div className="gallery-container">
-        <h1>All Reviews</h1>
         <div className="gallery">
           {reviewsArr &&
             reviewsArr.map((review) => (
               <ReviewCard
                 key={review.spot_id}
                 review={review}
-                listId={listId || ""}
+                listId={listId}
               />
             ))}
         </div>

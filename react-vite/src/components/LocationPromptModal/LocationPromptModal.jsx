@@ -1,11 +1,11 @@
 import { useMapsContext } from "../../context/mapsContext";
 
 function LocationPromptModal() {
-  const { requestGeolocationPermission, permissionPrompt } = useMapsContext();
+  const { getGeolocation, permissionPrompt } = useMapsContext();
 
   return (
     permissionPrompt && (
-      <button onClick={requestGeolocationPermission}>
+      <button onClick={getGeolocation}>
         Allow Location Access
       </button>
     )

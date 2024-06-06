@@ -17,9 +17,7 @@ const MapsProvider = ({ children }) => {
 
   // Set User current location =================================================
 
-
-
-  const requestGeolocationPermission = () => {
+  const getGeolocation = () => {
     if (navigator.geolocation) {
       console.log("Requesting geolocation permission...");
       navigator.geolocation.getCurrentPosition(
@@ -45,6 +43,11 @@ const MapsProvider = ({ children }) => {
           setLocationGranted(false);
           setCurrentLocationOn(false);
           setPermissionPrompt(true); // Show prompt if location access is denied
+        },
+        {
+          enableHighAccuracy: true, // High accuracy mode
+          timeout: 5000, // Timeout after 5 seconds
+          maximumAge: 0, // No cache, get a fresh position
         }
       );
     } else {
@@ -65,7 +68,7 @@ const MapsProvider = ({ children }) => {
               console.log("Geolocation permission granted.");
               setLocationGranted(true);
               setCurrentLocationOn(true);
-              requestGeolocationPermission();
+              getGeolocation();
             } else if (permissionStatus.state === "denied") {
               console.log("Geolocation permission denied.");
               setLocationGranted(false);
@@ -92,7 +95,7 @@ const MapsProvider = ({ children }) => {
                 console.log("Geolocation permission granted.");
                 setLocationGranted(true);
                 setCurrentLocationOn(true);
-                requestGeolocationPermission();
+                getGeolocation();
               } else if (this.state === "denied") {
                 console.log("Geolocation permission denied.");
                 setLocationGranted(false);
@@ -187,7 +190,7 @@ const MapsProvider = ({ children }) => {
         setCurrentLocation,
         setPermissionPrompt,
         permissionPrompt,
-        requestGeolocationPermission,
+        getGeolocation,
         selectedPlace,
         setSelectedPlace,
       }}

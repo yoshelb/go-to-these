@@ -18,12 +18,14 @@ function AllLists() {
   return (
     listsArr &&
     isLoaded && (
-      <div className="gallery-container">
+      <div>
         <h1>All lists</h1>
         <button onClick={() => navigate("/lists/new")}>New List</button>
-        <div className="gallery">
+        <div className="lists-div">
           {listsArr &&
-            listsArr.map((list) => <ListCard key={list.id} list={list} />)}
+            listsArr.map((list) => (
+              <ListCard  key={list.id} list={list} />
+            ))}
         </div>
       </div>
     )

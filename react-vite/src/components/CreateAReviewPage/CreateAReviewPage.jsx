@@ -22,9 +22,10 @@ function CreateAReviewPage() {
 
   useEffect(() => {
     setIsLoading(false);
+    setSelectedPlace(null);
     // Fetch the review data based on the review ID
     fetchList(setList, setIsLoading, listId, sessionUser, navigate);
-  }, [listId, sessionUser, navigate]);
+  }, [listId, sessionUser, navigate, setSelectedPlace]);
 
   return sessionUser ? (
     <div className="main-reviewpage">

@@ -5,6 +5,7 @@ function ListCard({ list }) {
   const navigate = useNavigate();
   return (
     <div
+      className="list-card"
       style={{ cursor: "pointer" }}
       onClick={() => navigate(`/lists/${list.id}`)}
     >

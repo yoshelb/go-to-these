@@ -5,9 +5,7 @@ function LocationPromptModal() {
 
   return (
     permissionPrompt && (
-      <button onClick={getGeolocation}>
-        Allow Location Access
-      </button>
+      <button onClick={() => getGeolocation()}>Allow Location Access</button>
     )
   );
 }

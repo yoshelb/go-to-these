@@ -40,9 +40,14 @@ const MapsProvider = ({ children }) => {
         },
         (error) => {
           console.error("Error fetching geolocation:", error);
+          if (error.code === error.PERMISSION_DENIED) {
+            alert(
+              "Location access is denied. Please enable location access in your device settings."
+            );
+          }
           setLocationGranted(false);
           setCurrentLocationOn(false);
-          setPermissionPrompt(true); // Show prompt if location access is denied
+          setPermissionPrompt(false); // Show prompt if location access is denied
         },
         {
           enableHighAccuracy: true, // High accuracy mode

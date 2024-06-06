@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request, abort, make_response
 from flask_login import login_required, current_user
-from app.models import db, Review, User, List, Place
+from app.models import db, Review, User, List, Place, List_Review
 from sqlalchemy.orm import joinedload
 
 reviews_routes = Blueprint('reviews', __name__)
@@ -36,11 +36,14 @@ def get_review_by_shop_id(place_id):
 @reviews_routes.route("/<review_id>")
 @login_required
 def get_review_by_reviewid(review_id):
-    review = Review.query.options(joinedload(Review.place)).get(review_id)
+    review = Review.query.options(joinedload(Review.place), joinedload(Review.list_review).joinedload(List_Review.list)).get(review_id)
+    print("REVIEW BEFORE DICT====> ", review)
     if(review.user_id != current_user.id):
        return jsonify({"error": "Review must belong to current user"}), 400
     if(review):
-     return jsonify(review.to_dict(include_place=True))
+     review_dict = review.to_dict(include_place=True, include_lists=True)
+     print("REVIEW_DICT======>", review_dict)
+     return jsonify(review_dict)
     else:
      return jsonify({"error": "Could not find review"}), 400
 
@@ -53,9 +56,17 @@ def update_review(review_id):
     review_to_update = Review.query.get_or_404(review_id)
     review_to_update.review = body["review"]
     review_to_update.rating = body['rating']
+    List_Review.query.filter_by(review_id=review_id).delete()
 
+    new_lists = body['lists']
+
+    for list_id in new_lists:
+       new_list_review = List_Review(review_id=int(review_id), list_id=int(list_id))
+       db.session.add(new_list_review)
+       db.session.commit()
 
     db.session.commit()
+
 
     return jsonify("updated"), 200
 

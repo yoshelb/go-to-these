@@ -27,6 +27,7 @@ function SingleReviewPage() {
         }
         const data = await response.json();
         setReview(data);
+        console.log("REVIEW in useeffect===>", data)
         if (sessionUser.id != data.user_id) navigate("/");
         setIsLoading(true);
       } catch (error) {

@@ -22,7 +22,7 @@ class Review(db.Model):
     user = db.relationship('User', back_populates='review')
     list_review = db.relationship('List_Review', back_populates='review', cascade='all, delete-orphan') #one to many and delete review in reviews list if review is deleted
 
-    def to_dict(self, include_place=False):
+    def to_dict(self, include_place=False, include_lists=False):
         state = instance_state(self)
 
         review_dict = {
@@ -40,5 +40,7 @@ class Review(db.Model):
             review_dict['user'] = self.user.to_dict() if self.user else None
         if (include_place):
             review_dict['place'] = self.place.to_dict() if self.place else None
+        if(include_lists):
+            review_dict["lists"] = [list_review.list.to_dict() for list_review in self.list_review]
 
         return review_dict

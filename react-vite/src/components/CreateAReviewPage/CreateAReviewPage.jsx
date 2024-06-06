@@ -7,6 +7,7 @@ import ReviewCreateForm from "./ReviewCreateForm";
 import "./CreateAReviewPage.css";
 import HomeNotSignedIn from "../HomePage/HomeNotSignedIn";
 
+
 function CreateAReviewPage() {
   const { selectedPlace, setSelectedPlace } = useMapsContext();
   const sessionUser = useSelector((state) => state.session.user);

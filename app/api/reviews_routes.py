@@ -63,7 +63,7 @@ def update_review(review_id):
     for list_id in new_lists:
        new_list_review = List_Review(review_id=int(review_id), list_id=int(list_id))
        db.session.add(new_list_review)
-       db.session.commit()
+
 
     db.session.commit()
 
@@ -125,8 +125,15 @@ def create_review_and_place():
                review = body['review'],
                rating = body['rating']
               )
-
           db.session.add(new_review)
+          db.session.commit()
+
+          new_lists = body['lists']
+          for list_id in new_lists:
+              new_list_review = List_Review(review_id=int(new_review.id), list_id=int(list_id))
+              db.session.add(new_list_review)
+
+
           db.session.commit()
 
         return jsonify(new_review.to_dict())  # Assuming Place model has a to_dict method to serialize to JSON

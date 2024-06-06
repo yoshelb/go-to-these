@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
 import StarsRating from "./StarsRating";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { thunkUserReviews } from "../../redux/reviews";
 import { useNavigate } from "react-router-dom";
+import ListCheckBoxes from "../SingleReviewPage/ListCheckBoxes";
+import { thunkUserLists } from "../../redux/lists";
 
 function ReviewCreateForm({ selectedPlace }) {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
   const [errors, setErrors] = useState("");
+  const [isChecked, setIsChecked] = useState({});
   const [alreadyReviewed, setAlreadyReviewed] = useState("");
   const [reviewId, setReviewId] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  let listsArr = useSelector((state) => state.lists.userLists);
+  let isLoaded = useSelector((state) => state.lists.isLoaded);
+
+  useEffect(() => {
+    dispatch(thunkUserLists());
+  }, [dispatch]);
 
   useEffect(() => {
     setAlreadyReviewed("");
@@ -42,10 +51,20 @@ function ReviewCreateForm({ selectedPlace }) {
       return;
     }
 
+    let lists = [];
+    if (Object.keys(isChecked).length > 0) {
+      Object.keys(isChecked).forEach((list_id) => {
+        if (isChecked[list_id]) {
+          lists.push(list_id);
+        }
+      });
+    }
+
     const reviewPackage = {
       selectedPlace: selectedPlace,
       review: review,
       rating: rating,
+      lists: lists,
     };
 
     const createNewReview = async () => {
@@ -70,15 +89,23 @@ function ReviewCreateForm({ selectedPlace }) {
   return (
     alreadyReviewed &&
     (alreadyReviewed === "no" ? (
-      <form onSubmit={(e) => handleSubmit(e)}>
-        <textarea
-          value={review}
-          onChange={(e) => setReview(e.target.value)}
-        ></textarea>
-        <StarsRating rating={rating} setRating={setRating} />
-        {errors && <p className="errors">{errors}</p>}
-        <button type="submit">Create Review</button>
-      </form>
+      isLoaded && (
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <textarea
+            value={review}
+            onChange={(e) => setReview(e.target.value)}
+          ></textarea>
+          <StarsRating rating={rating} setRating={setRating} />
+          {errors && <p className="errors">{errors}</p>}
+          <ListCheckBoxes
+            listArr={listsArr}
+            checkedLists={review.lists}
+            isChecked={isChecked}
+            setIsChecked={setIsChecked}
+          />
+          <button type="submit">Create Review</button>
+        </form>
+      )
     ) : (
       <div>
         <h2>You've already reviewed this place</h2>

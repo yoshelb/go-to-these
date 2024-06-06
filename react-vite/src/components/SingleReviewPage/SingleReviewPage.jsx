@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
-import SearchComponent from "../SearchComponent/SearchComponent";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import "./SingleReviewPage.css";
 import HomeNotSignedIn from "../HomePage/HomeNotSignedIn";
 import { useSelector } from "react-redux";
@@ -8,12 +7,21 @@ import ReviewMeat from "./ReviewMeat";
 import EditReviewForm from "./editReviewForm";
 
 function SingleReviewPage() {
+  const location = useLocation();
+  const listId = location.search?.split("=")[1] || "";
+  console.log("LISTID====", listId);
   const { reviewId } = useParams(); // Extract the review ID from the URL
   const [review, setReview] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
   let navigate = useNavigate();
+
+  useEffect(() => {
+    if (listId) {
+      setEditMode(true);
+    }
+  }, [listId]);
 
   useEffect(() => {
     setIsLoading(false);
@@ -27,7 +35,7 @@ function SingleReviewPage() {
         }
         const data = await response.json();
         setReview(data);
-        console.log("REVIEW in useeffect===>", data)
+        console.log("REVIEW in useeffect===>", data);
         if (sessionUser.id != data.user_id) navigate("/");
         setIsLoading(true);
       } catch (error) {
@@ -40,7 +48,6 @@ function SingleReviewPage() {
 
   return sessionUser ? (
     <>
-      <SearchComponent />
       {isLoading && review && (
         <>
           <div className="main-container">
@@ -64,6 +71,7 @@ function SingleReviewPage() {
               review={review}
               setEditMode={setEditMode}
               setReview={setReview}
+              listId={listId}
             />
           )}
         </>

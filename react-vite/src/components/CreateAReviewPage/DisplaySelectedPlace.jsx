@@ -1,6 +1,6 @@
 function DisplaySelectedPlace({selectedPlace}) {
     return (
-        selectedPlace && (
+
         <div>
           {console.log("SELECTED PLACE", selectedPlace)}
           <h2>{selectedPlace.displayName}</h2>
@@ -22,7 +22,7 @@ function DisplaySelectedPlace({selectedPlace}) {
             </a>
           )}
         </div>
-      ))
+    )
 }
 
 export default DisplaySelectedPlace

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import ListCheckBoxes from "../SingleReviewPage/ListCheckBoxes";
 import { thunkUserLists } from "../../redux/lists";
 
-function ReviewCreateForm({ selectedPlace }) {
+function ReviewCreateForm({ selectedPlace, listId, setSelectedPlace }) {
   const [review, setReview] = useState("");
   const [rating, setRating] = useState(0);
   const [errors, setErrors] = useState("");
@@ -66,9 +66,11 @@ function ReviewCreateForm({ selectedPlace }) {
       rating: rating,
       lists: lists,
     };
+    console.log("REVIEW PACKAGE", reviewPackage);
 
     const createNewReview = async () => {
-      let response = await fetch("/api/reviews/create", {
+      console.log("REVIEW PACKAGE", reviewPackage);
+      let response = await fetch("/api/reviews/new", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +78,13 @@ function ReviewCreateForm({ selectedPlace }) {
         body: JSON.stringify(reviewPackage),
       });
       if (response.ok) {
-        dispatch(thunkUserReviews()).then(navigate("/"));
+        dispatch(thunkUserReviews());
+        setSelectedPlace(null);
+        if (listId) {
+          return navigate(`/lists/${listId}`);
+        } else {
+          return navigate("/");
+        }
       } else {
         alert("Sorry Internal Server Error!");
       }
@@ -102,14 +110,21 @@ function ReviewCreateForm({ selectedPlace }) {
             checkedLists={review.lists}
             isChecked={isChecked}
             setIsChecked={setIsChecked}
+            listId={listId}
           />
           <button type="submit">Create Review</button>
         </form>
       )
     ) : (
       <div>
-        <h2>You've already reviewed this place</h2>
-        <button onClick={() => navigate(`/reviews/${reviewId}`)}>
+        <h2>You&apos;ve already reviewed this place</h2>
+        <button
+          onClick={() =>
+            listId
+              ? navigate(`/reviews/${reviewId}?listId=${listId}`)
+              : navigate(`/reviews/${reviewId}`)
+          }
+        >
           See Review
         </button>
       </div>

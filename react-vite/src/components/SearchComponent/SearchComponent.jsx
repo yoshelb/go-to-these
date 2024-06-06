@@ -28,7 +28,6 @@ function SearchComponent() {
     googleMapsReady && (
       <div className="Search-component-main">
         <div className="search-wrapper">
-          <h1>Find a place to review</h1>
           <div className="location-div">
             <LocationAutoComplete
               setSearchLocation={setSearchLocation}

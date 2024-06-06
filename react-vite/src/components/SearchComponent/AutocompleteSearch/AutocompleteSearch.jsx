@@ -124,7 +124,8 @@ const AutocompleteSearch = ({
     }
 
     setSelectedPlace(placeObj);
-    return navigate("/reviews/create");
+    // return navigate("/reviews/new");
+    return;
 
     // resultsRef.current.replaceChildren(placeText);
     // titleRef.current.innerText = "Selected Place:";

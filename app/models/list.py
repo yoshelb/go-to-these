@@ -13,7 +13,8 @@ class List(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id'), ondelete='CASCADE'), nullable=False)
     name = db.Column(db.String(50), nullable=False)
-    description = db.Column(db.String(100))
+    description = db.Column(db.String(200))
+    shareable_by_link = db.Column(db.Boolean, default=False)
     friends_view = db.Column(db.Boolean, default=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now, onupdate=datetime.now)
@@ -30,6 +31,7 @@ class List(db.Model):
             'user_id': self.user_id,
             'name': self.name,
             'description': self.description,
+            'shareable_by_link': self.shareable_by_link,
             'friends_view': self.friends_view,
             'created_at': self.created_at,
             'updated_at': self.updated_at

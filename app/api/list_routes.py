@@ -36,6 +36,26 @@ def get_list_by_id(list_id):
         return jsonify(list_dict), 200
 
 
+#CREATE A LIST
+
+@list_routes.route("/new", methods=['POST'])
+@login_required
+def create_list():
+    body = request.get_json()
+
+    new_list = List(user_id=current_user.id, name= body['name'], description=body['description'])
+    if(new_list):
+        db.session.add(new_list)
+        db.session.commit()
+        # print("NEW LIST", new_list)
+        list_dict = new_list.to_dict()
+        print("LIST DICT ===========>", list_dict)
+        return jsonify(list_dict), 200
+    else:
+        return jsonify("internal servor errror"), 400
+
+
+
 # Edit list by Deleting a REVIEW
 @list_routes.route("/<list_id>/reviews/<review_id>/delete", methods=['DELETE'])
 @login_required
@@ -45,3 +65,13 @@ def remove_review_from_list(list_id, review_id):
         db.session.delete(list_review_to_remove)
         db.session.commit()
         return jsonify("sucessfully removed"), 200
+
+# DELETE A LIST
+
+@list_routes.route("/<list_id>/delete", methods=['DELETE'])
+@login_required
+def delete_list(list_id):
+    list_to_delete = List.query.get_or_404(list_id)
+    db.session.delete(list_to_delete)
+    db.session.commit()
+    return jsonify("sucessfully deleted"), 200

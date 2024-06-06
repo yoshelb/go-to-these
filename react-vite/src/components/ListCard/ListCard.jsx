@@ -9,9 +9,9 @@ function ListCard({ list }) {
       onClick={() => navigate(`/lists/${list.id}`)}
     >
       <h1>{list.name}</h1>
-      {list.reviews.map((review) => {
+      {/* {list.reviews.map((review) => {
         return <p key={review.id}>{review.place.displayName}</p>;
-      })}
+      })} */}
     </div>
   );
 }

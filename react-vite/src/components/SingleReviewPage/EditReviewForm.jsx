@@ -4,26 +4,27 @@ import { useSelector, useDispatch } from "react-redux";
 import ListCheckBoxes from "./ListCheckBoxes";
 import { useEffect } from "react";
 import { thunkUserLists } from "../../redux/lists";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-function EditReviewForm({ review, setEditMode, setReview }) {
+function EditReviewForm({ review, setEditMode, setReview, listId }) {
   const [newReview, setNewReview] = useState(review.review);
   const [newRating, setNewRating] = useState(review.rating);
   const [isChecked, setIsChecked] = useState({});
   const dispatch = useDispatch();
-  //   const navigate = useNavigate();
+  const navigate = useNavigate();
   let listsArr = useSelector((state) => state.lists.userLists);
   let isLoaded = useSelector((state) => state.lists.isLoaded);
 
+  // GET LIST INFO
   useEffect(() => {
     dispatch(thunkUserLists());
   }, [dispatch]);
 
+  // SUBMIT===============
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const updateReview = async () => {
-      
       let lists = [];
       if (Object.keys(isChecked).length > 0) {
         Object.keys(isChecked).forEach((list_id) => {
@@ -32,8 +33,6 @@ function EditReviewForm({ review, setEditMode, setReview }) {
           }
         });
       }
-
-
       let response = await fetch(`/api/reviews/${review.id}/update`, {
         method: "PUT",
         headers: {
@@ -53,13 +52,18 @@ function EditReviewForm({ review, setEditMode, setReview }) {
         }
         const data = await response.json();
         setReview(data);
+        if (listId) {
+          return navigate(`/lists/${listId}`);
+        } else {
+          setEditMode(false);
+        }
 
-        setEditMode(false);
         // navigate(`/reviews/${review.id}`);
       }
     };
     updateReview();
   };
+
   return (
     isLoaded && (
       <form onSubmit={(e) => handleSubmit(e)}>
@@ -71,6 +75,7 @@ function EditReviewForm({ review, setEditMode, setReview }) {
         <ListCheckBoxes
           listArr={listsArr}
           checkedLists={review.lists}
+          listId={listId}
           isChecked={isChecked}
           setIsChecked={setIsChecked}
         />

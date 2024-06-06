@@ -72,12 +72,12 @@ def update_review(review_id):
 
 
 # Create Review and Place
-@reviews_routes.route("/create", methods=['POST'])
+@reviews_routes.route("/new", methods=['POST'])
 @login_required
 def create_review_and_place():
 
     body = request.get_json()
-    # print("BODY IN ROUTE", body)
+    print("BODY IN ROUTE===========>", body)
 
     try:
         selected_place = body['selectedPlace']

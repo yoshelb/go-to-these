@@ -1,8 +1,8 @@
-"""updated user to not need names
+"""changed list model
 
-Revision ID: 6fd80d0ae48e
+Revision ID: 9cb8cc10237b
 Revises:
-Create Date: 2024-06-03 11:35:08.132470
+Create Date: 2024-06-06 09:07:19.745659
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '6fd80d0ae48e'
+revision = '9cb8cc10237b'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -53,7 +53,8 @@ def upgrade():
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('user_id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('description', sa.String(length=100), nullable=True),
+    sa.Column('description', sa.String(length=200), nullable=True),
+    sa.Column('shareable_by_link', sa.Boolean(), nullable=True),
     sa.Column('friends_view', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),

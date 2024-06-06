@@ -1,6 +1,12 @@
 import { useEffect } from "react";
 
-function ListCheckBoxes({ listArr, checkedLists, isChecked, setIsChecked }) {
+function ListCheckBoxes({
+  listArr,
+  checkedLists,
+  isChecked,
+  setIsChecked,
+  listId,
+}) {
   //   const [isChecked, setIsChecked] = useState({});
 
   useEffect(() => {
@@ -8,11 +14,16 @@ function ListCheckBoxes({ listArr, checkedLists, isChecked, setIsChecked }) {
     listArr.forEach((list) => {
       newCheckedObj[list.id] = false;
     });
+
     if (checkedLists) {
       checkedLists.forEach((list) => {
         newCheckedObj[list.id] = true;
       });
     }
+    if (listId) {
+      newCheckedObj[listId] = true;
+    }
+
     setIsChecked(newCheckedObj);
   }, [listArr, checkedLists, setIsChecked]);
 

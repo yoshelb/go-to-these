@@ -6,6 +6,8 @@ import HomePage from "../components/HomePage/index.js";
 import CreateAReviewPage from "../components/CreateAReviewPage";
 import SingleReviewPage from "../components/SingleReviewPage";
 import ListDetailPage from "../components/ListDetailPage/ListDetailPage.jsx";
+import NewListForm from "../components/NewListForm/NewListForm.jsx";
+import DeleteListPage from "../components/DeleteListPage/DeleteListPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +26,7 @@ export const router = createBrowserRouter([
         element: <SignupFormPage />,
       },
       {
-        path: "/reviews/create",
+        path: "/reviews/new",
         element: <CreateAReviewPage />,
       },
       {
@@ -32,9 +34,17 @@ export const router = createBrowserRouter([
         element: <SingleReviewPage />,
       },
       {
-        path:"/lists/:listId",
-        element: <ListDetailPage/>
-      }
+        path: "/lists/:listId",
+        element: <ListDetailPage />,
+      },
+      {
+        path: "/lists/new",
+        element: <NewListForm />,
+      },
+      {
+        path: "/lists/:listId/delete",
+        element: <DeleteListPage />,
+      },
     ],
   },
 ]);

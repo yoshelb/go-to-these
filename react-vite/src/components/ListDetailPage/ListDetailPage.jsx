@@ -1,10 +1,10 @@
 import "./ListDetailPage.css";
 import HomeNotSignedIn from "../HomePage/HomeNotSignedIn";
-import ReviewCard from "../AllReviews.jsx/ReviewCard";
+import ReviewCard from "../AllReviews/ReviewCard";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import SearchComponent from "../SearchComponent/SearchComponent";
 import { useNavigate, useParams } from "react-router-dom";
+import { fetchList } from "../Utils";
 
 function ListDetailPage() {
   const navigate = useNavigate();
@@ -14,25 +14,10 @@ function ListDetailPage() {
   const [editMode, setEditMode] = useState(false);
   const sessionUser = useSelector((state) => state.session.user);
 
-  const fetchReview = async () => {
-    try {
-      const response = await fetch(`/api/lists/${listId}`);
-      if (!response.ok) {
-        throw new Error(response.error);
-      }
-      const data = await response.json();
-      setList(data);
-      if (sessionUser.id != data.user_id) navigate("/");
-      setIsLoading(true);
-    } catch (error) {
-      console.error("Error fetching review:", error);
-    }
-  };
-
   useEffect(() => {
     setIsLoading(false);
     // Fetch the review data based on the review ID
-    fetchReview();
+    fetchList(setList, setIsLoading, listId, sessionUser, navigate);
   }, [listId, sessionUser, navigate]);
 
   const removeFromList = (review_id) => {
@@ -47,16 +32,16 @@ function ListDetailPage() {
         if (!response.ok) {
           throw new Error(response.error);
         }
-        await fetchReview();
+        await fetchList(setList, setIsLoading, listId, sessionUser, navigate);
       } catch (error) {
         console.error("Error fetching review:", error);
       }
     };
     removeReview();
   };
+
   return sessionUser ? (
     <div>
-      <SearchComponent />
       {isLoading && list && (
         <div>
           <div className="gallery-container">
@@ -64,7 +49,13 @@ function ListDetailPage() {
             <button onClick={() => setEditMode(!editMode)}>
               {editMode ? "Finished Editing" : "Edit List"}
             </button>
+            <button onClick={() => navigate(`/lists/${list.id}/delete`)}>
+              Delete List
+            </button>
             <div className="gallery">
+              <div onClick={() => navigate(`/reviews/new?list=${list.id}`)}>
+                <h3>Add a Spot</h3>
+              </div>
               {list.reviews &&
                 list.reviews.map((review) => (
                   <div key={review.spot_id}>

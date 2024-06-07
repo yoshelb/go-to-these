@@ -4,20 +4,13 @@ import "./Navigation.css";
 
 function Navigation() {
   return (
-    <ul>
-      <li>
-        <NavLink to="/">
-          <img
-            alt="logo"
-            src={`/go-to-these.svg`}
-          ></img>
-        </NavLink>
-      </li>
+    <div className="nav-div">
+      <NavLink to="/">
+        <img alt="logo" src={`/go-to-these.svg`}></img>
+      </NavLink>
 
-      <li>
-        <ProfileButton />
-      </li>
-    </ul>
+      <ProfileButton />
+    </div>
   );
 }
 

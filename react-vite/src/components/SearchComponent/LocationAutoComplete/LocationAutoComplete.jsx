@@ -29,29 +29,28 @@ const LocationAutoComplete = ({
     if (locationGranted && currentLocationOn) {
       // console.log("CURRENT LOCATION ON")
       if (currentLocation) return setSearchLocation(currentLocation);
-           if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
           (position) => {
             const { latitude, longitude } = position.coords;
-              const request = {
-              locationRestriction : {
-              west: longitude - 0.05,
-              north: latitude + 0.05,
-              east: longitude + 0.05,
-              south: latitude - 0.05,
-
-          },
-          origin : {lat: latitude, lng: longitude }
-           }
-              setCurrentLocation(request)
-              setSearchLocation(request)
-              setCurrentLocationOn(true)
+            const request = {
+              locationRestriction: {
+                west: longitude - 0.05,
+                north: latitude + 0.05,
+                east: longitude + 0.05,
+                south: latitude - 0.05,
+              },
+              origin: { lat: latitude, lng: longitude },
+            };
+            setCurrentLocation(request);
+            setSearchLocation(request);
+            setCurrentLocationOn(true);
           },
           (error) => {
-            console.error('Error fetching geolocation:', error);
+            console.error("Error fetching geolocation:", error);
           }
         );
-       }
+      }
     }
   }, [locationGranted, currentLocationOn]);
 
@@ -110,7 +109,7 @@ const LocationAutoComplete = ({
         request
       );
 
-    titleRef.current.innerText = `Query predictions for "${request.input}"`;
+    titleRef.current.innerText = `Search results for "${request.input}"`;
     // Clear the list first.
     resultsRef.current.replaceChildren();
 
@@ -201,16 +200,13 @@ const LocationAutoComplete = ({
         </>
       ) : (
         !searchLocation && (
-          <input
-            ref={inputRef}
-            type="text"
-            placeholder="Search for a place..."
-          />
+          <input ref={inputRef} type="text" placeholder="Find a spot..." />
         )
       )}
 
       {((currentLocation && currentLocationOn) || searchLocation) && (
         <button
+          className="small-button"
           onClick={() => {
             setSearchLocation("");
             setChosenPlace("");
@@ -222,6 +218,7 @@ const LocationAutoComplete = ({
       )}
       {locationGranted && !currentLocationOn && (
         <button
+          className="small-button"
           onClick={() => {
             setSearchLocation("");
             setChosenPlace("");

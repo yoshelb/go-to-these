@@ -50,7 +50,7 @@ function SingleReviewPage() {
     <>
       {isLoading && review && (
         <>
-          <div className="main-container">
+          <div>
             <h1>{review.place.displayName}</h1>
             {
               <div className="preview-img-container">

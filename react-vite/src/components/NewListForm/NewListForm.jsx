@@ -17,19 +17,21 @@ function NewListForm() {
     e.preventDefault();
 
     const newErrorObj = {};
+
     if (name.length < 1) {
       newErrorObj.name = "Name is required.";
     }
-    if (name.length > 50) {
-      newErrorObj.name = "Name must be shorter than 50 characters.";
+    if (name.length > 25) {
+      newErrorObj.name = "Name must be shorter than 25 characters.";
     }
     if (description.length > 200) {
       newErrorObj.description =
         "Description must be shorter than 200 characters.";
     }
-    setErrors(newErrorObj);
 
-    if (Object.keys(newErrorObj).length > 0) return;
+    if (Object.keys(newErrorObj).length > 0) {
+      return setErrors(newErrorObj);
+    }
 
     const createList = async () => {
       const response = await fetch("/api/lists/new", {
@@ -63,7 +65,6 @@ function NewListForm() {
         />
         <button
           type="submit"
-          disabled={Object.keys(errors).length > 0 ? true : false}
         >
           Create List
         </button>

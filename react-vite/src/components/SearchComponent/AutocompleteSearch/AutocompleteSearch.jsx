@@ -76,7 +76,7 @@ const AutocompleteSearch = ({
         request
       );
 
-    titleRef.current.innerText = `Query predictions for "${request.input}"`;
+    titleRef.current.innerText = `Search results for "${request.input}"`;
     // Clear the list first.
     resultsRef.current.replaceChildren();
 
@@ -146,6 +146,12 @@ const AutocompleteSearch = ({
       <input
         ref={inputRef}
         type="text"
+        style={{
+          cursor:
+            disabled && locationGranted && currentLocationOn
+              ? "wait"
+              : "default",
+        }}
         placeholder={
           disabled
             ? locationGranted && currentLocationOn

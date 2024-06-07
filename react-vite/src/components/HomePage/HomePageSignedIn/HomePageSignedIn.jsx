@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function HomePageSignedIn({ sessionUser }) {
   const navigate = useNavigate();
   return (
-    <main className="main-container ">
+    <main >
       <AllLists />
       <button onClick={() => navigate("/reviews/new")}>Add a Spot</button>
       <h2>My Spots:</h2>

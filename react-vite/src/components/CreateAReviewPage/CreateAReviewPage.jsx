@@ -31,8 +31,8 @@ function CreateAReviewPage() {
     <div className="main-reviewpage">
       <h1>
         {listId
-          ? isLoading && `Add a review to ${list.name}`
-          : "Search for a spot"}
+          ? isLoading && `Add a spot to ${list.name}`
+          : "Find a spot"}
       </h1>
       <SearchComponent />
       {selectedPlace && <DisplaySelectedPlace selectedPlace={selectedPlace} />}

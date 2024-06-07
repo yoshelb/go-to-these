@@ -7,7 +7,7 @@ function ReviewMeat({ review, setEditMode }) {
   const navigate = useNavigate();
 
   return (
-    <div className="main-container">
+    <div>
       <div>
         <p>{review.review}</p>
         <div className="star-div">

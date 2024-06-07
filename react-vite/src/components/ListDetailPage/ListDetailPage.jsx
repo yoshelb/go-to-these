@@ -54,9 +54,14 @@ function ListDetailPage() {
               Delete List
             </button>
             <div className="gallery">
-              <div onClick={() => navigate(`/reviews/new?list=${list.id}`)}>
-                <h3>Add a Spot</h3>
-              </div>
+              <div
+                className="shop-image add"
+                onClick={() => navigate(`/reviews/new?list=${list.id}`)}
+                style={{
+                  backgroundImage: `url("/add.png")`,
+                  cursor: "pointer",
+                }}
+              ></div>
               {list.reviews &&
                 list.reviews
                   .sort(

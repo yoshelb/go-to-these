@@ -19,10 +19,12 @@ export default function Layout() {
     <>
       <ModalProvider>
         <MapsProvider>
-          <Navigation />
-          <LocationPromptModal />
-          {isLoaded && <Outlet />}
-          <Modal />
+          <div className="main-container">
+            <Navigation />
+            <LocationPromptModal />
+            {isLoaded && <Outlet />}
+            <Modal />
+          </div>
         </MapsProvider>
       </ModalProvider>
     </>

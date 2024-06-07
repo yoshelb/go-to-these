@@ -3,13 +3,15 @@ function ListForm({ setName, setDescription, name, description, errors }) {
     <>
       <label>List Name:</label>
       <input value={name} onChange={(e) => setName(e.target.value)}></input>
-      {errors.name && <p className="errors">{errors.name}</p>}
+      {errors.name && <p style={{ color: "#FF253F" }}>{errors.name}</p>}
       <label>List Description</label>
       <textarea
         value={description}
         onChange={(e) => setDescription(e.target.value)}
       ></textarea>
-      {errors.description && <p className="errors">{errors.description}</p>}
+      {errors.description && (
+        <p style={{ color: "#FF253F" }}>{errors.description}</p>
+      )}
     </>
   );
 }

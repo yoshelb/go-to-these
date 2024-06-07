@@ -8,7 +8,6 @@ function Navigation() {
       <NavLink to="/">
         <img alt="logo" src={`/go-to-these.svg`}></img>
       </NavLink>
-
       <ProfileButton />
     </div>
   );

@@ -3,6 +3,11 @@ body {
   font-family: "Lato", sans-serif;
   background-color: #f8f8f8;
 }
+.whole-lower-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 .main-container {
   max-width: 1200px;
   padding: 40px;
@@ -32,6 +37,7 @@ button {
   margin: 10px;
   cursor: pointer;
   text-transform: uppercase;
+  margin-left: 0px;
 }
 button:hover {
   color: #f9c39c;
@@ -40,6 +46,7 @@ button:hover {
 .small-button {
   font-size: 12px;
   padding: 12px;
+  margin-left: 0px;
 }
 
 input {

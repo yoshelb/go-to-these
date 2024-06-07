@@ -11,4 +11,11 @@ li {
 .nav-div {
   display: flex;
   justify-content: space-between;
+  margin: 40px;
+}
+
+@media (max-width: 640px) {
+  .nav-div {
+    margin: 20px;
+  }
 }

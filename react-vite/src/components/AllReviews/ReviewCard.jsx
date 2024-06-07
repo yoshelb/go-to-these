@@ -18,7 +18,13 @@ function ReviewCard({ review, listId }) {
       <div style={{ cursor: "pointer" }} onClick={() => handleNavigate()}>
         <div
           className="shop-image"
-          style={{ backgroundImage: `url("${review.place.previewImage}")` }}
+          style={{
+            backgroundImage: `url("${
+              review.place.previewImage
+                ? review.place.previewImage
+                : "/missing-place.png"
+            }")`,
+          }}
         ></div>
         <h2>{review.place.displayName}</h2>
         <div className="star-div">

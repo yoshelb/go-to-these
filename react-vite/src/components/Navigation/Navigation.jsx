@@ -6,7 +6,12 @@ function Navigation() {
   return (
     <ul>
       <li>
-        <NavLink to="/">Home</NavLink>
+        <NavLink to="/">
+          <img
+            alt="logo"
+            src={`/go-to-these.svg`}
+          ></img>
+        </NavLink>
       </li>
 
       <li>

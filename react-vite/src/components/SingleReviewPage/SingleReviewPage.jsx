@@ -52,16 +52,20 @@ function SingleReviewPage() {
         <>
           <div className="main-container">
             <h1>{review.place.displayName}</h1>
-            {review.place.previewImage && (
+            {
               <div className="preview-img-container">
                 <div
                   className="preview-img"
                   style={{
-                    backgroundImage: `url("${review.place.previewImage}")`,
+                    backgroundImage: `url("${
+                      review.place.previewImage
+                        ? review.place.previewImage
+                        : "/missing-place.png"
+                    }")`,
                   }}
                 ></div>
               </div>
-            )}
+            }
           </div>
 
           {!editMode ? (

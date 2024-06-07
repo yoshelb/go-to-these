@@ -55,6 +55,23 @@ def create_list():
         return jsonify("internal servor errror"), 400
 
 
+# EDIT A LIST
+
+@list_routes.route("/<list_id>/edit", methods=['PUT'])
+@login_required
+def edit_list(list_id):
+    print("HITTING ROUTE", list_id)
+    body = request.get_json()
+    list_to_update = List.query.get_or_404(list_id)
+    list_to_update.name = body["name"]
+    list_to_update.description = body["description"]
+    db.session.add(list_to_update)
+    db.session.commit()
+
+    return jsonify("update sucsessful"), 200
+
+
+
 
 # Edit list by Deleting a REVIEW
 @list_routes.route("/<list_id>/reviews/<review_id>/delete", methods=['DELETE'])

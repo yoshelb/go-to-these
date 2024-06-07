@@ -2,9 +2,10 @@
   display: flex;
 }
 
-.main-reviewpage {
+/* .main-reviewpage {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  /* align-items: center; */
-}
+  flex-wrap: ;
+  align-items: center;
+} */

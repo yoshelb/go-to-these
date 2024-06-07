@@ -22,7 +22,7 @@ function AllReviews({ listId }) {
   return (
     reviewsArr &&
     isLoaded && (
-      <div className="gallery-container">
+      <div>
         <div className="gallery">
           {reviewsArr &&
             reviewsArr.map((review) => (

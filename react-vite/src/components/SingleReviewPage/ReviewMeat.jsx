@@ -17,6 +17,25 @@ function ReviewMeat({ review, setEditMode }) {
           {review.rating >= 4 ? <IoIosStar /> : <IoIosStarOutline />}
           {review.rating >= 5 ? <IoIosStar /> : <IoIosStarOutline />}
         </div>
+        {review.place.websiteUri && (
+          <a
+            className="place-link"
+            href={review.place.websiteUri}
+            target="blank"
+          >
+            Website
+          </a>
+        )}
+        {review.place.googleMapsUri && (
+          <a
+            className="place-link"
+            href={review.place.googleMapsUri}
+            target="blank"
+          >
+            Google Maps
+          </a>
+        )}
+        <p>{review.place.formattedAddress}</p>
         <div className="lists">
           <h3>Lists:</h3>
           <ul>

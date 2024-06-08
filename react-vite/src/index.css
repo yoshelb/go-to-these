@@ -2,6 +2,8 @@
 body {
   font-family: "Lato", sans-serif;
   background-color: #f8f8f8;
+  margin: 0;
+  padding: 0;
 }
 .whole-lower-body {
   display: flex;
@@ -12,6 +14,7 @@ body {
   max-width: 1200px;
   width: 100%;
   padding: 40px;
+  box-sizing: border-box;
 }
 
 button {
@@ -35,7 +38,7 @@ button {
   box-shadow: none;
   font-weight: bold;
   letter-spacing: 2px;
-  margin: 10px;
+
   cursor: pointer;
   text-transform: uppercase;
   margin-left: 0px;
@@ -50,18 +53,42 @@ button:hover {
   margin-left: 0px;
 }
 
+.clear-location {
+  color: #4fc0e8;
+  background-color: #f0efec;
+}
+
+.clear-location:hover {
+  background-color: #4fc0e8;
+  color: #f0efec;
+}
 input {
   font-size: 16px;
   border-radius: 22px;
   padding: 8px;
 }
 
-/* li {
-  text-decoration: none;
-} */
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
 
 h1 {
   padding: 0;
+}
+.place-link {
+  color: #4fc0e8;
+  text-decoration: none;
+  margin-right: 15px;
+}
+
+.list-name {
+  color: #4fc0e8;
+}
+
+.plus-button {
+  width: 150px;
 }
 /* CSS FOR THE SPOT GALLERY */
 .gallery {
@@ -72,15 +99,61 @@ h1 {
   margin-top: 80px;
 }
 
+textarea {
+  width: 500px;
+  height: 100px;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  padding: 10px;
+  border-radius: 22px;
+  font-family: "Lato", sans-serif;
+}
+.current-location {
+  color: #f14b03;
+}
+form {
+  max-width: 500px;
+}
+li > a {
+  cursor: pointer;
+}
+
+li {
+  padding: 10px 0 10px 0;
+  box-sizing: border-box;
+}
+li:hover {
+  background-color: #f9c39c;
+}
+ul {
+  padding: 0;
+}
+
 @media (max-width: 640px) {
-  .main-containter {
+  .main-container {
     padding: 20px;
-    width: auto;
   }
   .gallery {
     margin-top: 20px;
   }
   .add {
     align-self: center;
+  }
+  input {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  textarea {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .logo {
+    width: 200px;
+  }
+  li {
+    padding: 8px 0 8px 0;
+    box-sizing: border-box;
   }
 }

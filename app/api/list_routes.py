@@ -54,6 +54,21 @@ def create_list():
     else:
         return jsonify("internal servor errror"), 400
 
+#ADD REVIEW TO A LIST BY LIST ID
+@list_routes.route("/<list_id>/reviews/<review_id>/add", methods=['POST'])
+@login_required
+def add_review(list_id, review_id):
+    old_list_review = List_Review.query.filter_by(review_id=review_id, list_id=list_id).first()
+
+    if(not old_list_review):
+       new_list_review = List_Review(review_id=int(review_id), list_id=int(list_id))
+       db.session.add(new_list_review)
+    else:
+        db.session.add(old_list_review)
+
+    db.session.commit()
+    return jsonify("updated"), 200
+
 
 # EDIT A LIST
 

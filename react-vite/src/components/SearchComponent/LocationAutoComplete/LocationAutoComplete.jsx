@@ -192,7 +192,7 @@ const LocationAutoComplete = ({
     <>
       {locationGranted && currentLocationOn ? (
         <>
-          <h2>Current Location</h2>
+          <h2 className="current-location">Current Location</h2>
         </>
       ) : !currentLocationOn && searchLocation ? (
         <>
@@ -206,7 +206,7 @@ const LocationAutoComplete = ({
 
       {((currentLocation && currentLocationOn) || searchLocation) && (
         <button
-          className="small-button"
+          className="small-button clear-location"
           onClick={() => {
             setSearchLocation("");
             setChosenPlace("");

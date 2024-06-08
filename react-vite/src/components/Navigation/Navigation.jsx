@@ -6,7 +6,7 @@ function Navigation() {
   return (
     <div className="nav-div">
       <NavLink to="/">
-        <img alt="logo" src={`/go-to-these.svg`}></img>
+        <img className="logo" alt="logo" src={`/go-to-these.svg`}></img>
       </NavLink>
       <ProfileButton />
     </div>

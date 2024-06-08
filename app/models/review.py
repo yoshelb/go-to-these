@@ -35,7 +35,7 @@ class Review(db.Model):
         'updated_at': self.updated_at,
 
         }
-
+        
         if 'user' in state.dict:
             review_dict['user'] = self.user.to_dict() if self.user else None
         if (include_place):

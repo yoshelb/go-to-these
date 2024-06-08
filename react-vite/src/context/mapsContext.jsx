@@ -48,12 +48,12 @@ const MapsProvider = ({ children }) => {
           setLocationGranted(false);
           setCurrentLocationOn(false);
           setPermissionPrompt(false); // Show prompt if location access is denied
-        },
-        {
-          enableHighAccuracy: true, // High accuracy mode
-          timeout: 5000, // Timeout after 5 seconds
-          maximumAge: 0, // No cache, get a fresh position
         }
+        // {
+        //   enableHighAccuracy: true, // High accuracy mode
+        //   timeout: 5000, // Timeout after 5 seconds
+        //   maximumAge: 0, // No cache, get a fresh position
+        // }
       );
     } else {
       console.log("Geolocation is not supported by this browser.");

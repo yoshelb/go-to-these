@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" preserveAspectRatio="none">
+  <defs>
+    <clipPath id="brushClip">
+      <path d="M10 150 C 100 80, 200 100, 300 50 C 400 0, 500 50, 590 150" />
+    </clipPath>
+  </defs>
+</svg>

@@ -1,17 +1,26 @@
-.lists-div {
+/* .lists-div {
   display: flex;
   align-items: space-around;
   gap: 30px;
   flex-wrap: wrap;
   margin-top: 40px;
   margin-bottom: 40px;
-}
+} */
 .list-card {
   padding: 5px;
   box-sizing: border-box;
-  border: 1px solid grey;
   border-radius: 12px;
 }
+/* .list-card:nth-of-type(3n) {
+  background-color: #f0efec;
+}
+.list-card:nth-of-type(3n + 1) {
+  background-color: #efebe2;
+}
+.list-card:nth-of-type(3n + 2) {
+  background-color: #f4f8f3;
+}
+
 .list-card > h1 {
   margin: 0;
-}
+} */

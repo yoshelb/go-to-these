@@ -9,7 +9,7 @@ function ListCard({ list }) {
       style={{ cursor: "pointer" }}
       onClick={() => navigate(`/lists/${list.id}`)}
     >
-      <h1>{list.name}</h1>
+      <h1 class="swoosh-text">{list.name}</h1>
     </div>
   );
 }

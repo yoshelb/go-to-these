@@ -9,3 +9,12 @@
   flex-wrap: ;
   align-items: center;
 } */
+.shop-image {
+  /* position: absolute; */
+  /* height: 100%; */
+  padding-bottom: calc(100% - 2px);
+  background-size: cover;
+  background-position: center;
+  border-radius: 2em;
+  box-sizing: border-box;
+}

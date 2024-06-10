@@ -3,7 +3,11 @@ function ListForm({ setName, setDescription, name, description, errors }) {
     <>
       <div>
         <label>List Name: </label>
-        <input value={name} onChange={(e) => setName(e.target.value)}></input>
+        <input
+          value={name}
+          type="text"
+          onChange={(e) => setName(e.target.value)}
+        ></input>
         {errors.name && <p style={{ color: "#FF253F" }}>{errors.name}</p>}
       </div>
       <div>

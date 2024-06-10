@@ -99,8 +99,9 @@ h1 {
 }
 .lists > li {
   margin-top: 10px;
-  font-weight: 400;
+  font-weight: bold;
   text-transform: uppercase;
+  color: #898989;
 }
 
 .plus-button {

@@ -1,12 +1,14 @@
 import { NavLink, useNavigate } from "react-router-dom";
 // import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { thunkLogout } from "../../redux/session";
+
 
 function Navigation() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((store) => store.session.user);
 
   const logout = (e) => {
     e.preventDefault();
@@ -20,7 +22,7 @@ function Navigation() {
         <img className="logo" alt="logo" src={`/go-to-these.svg`}></img>
       </NavLink>
       <div>
-        <button onClick={(e) => logout(e)}>Logout</button>
+        {user && <button onClick={(e) => logout(e)}>Logout</button>}
       </div>
 
       {/* <ProfileButton /> */}

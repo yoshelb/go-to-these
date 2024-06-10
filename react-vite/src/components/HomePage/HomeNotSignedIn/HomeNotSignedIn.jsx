@@ -4,7 +4,13 @@ function HomeNotSignedIn() {
   const navigate = useNavigate();
   return (
     <main>
-      <h1>Start collecting lists of spots to rember and share with friends.</h1>
+      <h1>
+        Collect spots
+        <br />
+        Make lists
+        <br />
+        And share them with friends
+      </h1>
       <button className="blue-button" onClick={() => navigate("/login")}>
         Login
       </button>

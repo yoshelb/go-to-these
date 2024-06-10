@@ -98,7 +98,11 @@ function EditReviewForm({ review, setEditMode, setReview, listId }) {
         />
         <div>
           <button type="submit">Update Review</button>
-          <button type="button" onClick={() => setEditMode(false)}>
+          <button
+            type="button"
+            className="blue-button"
+            onClick={() => setEditMode(false)}
+          >
             Cancel
           </button>
         </div>

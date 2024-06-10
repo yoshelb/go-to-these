@@ -38,7 +38,6 @@ button {
   box-shadow: none;
   font-weight: bold;
   letter-spacing: 2px;
-
   cursor: pointer;
   text-transform: uppercase;
   margin-left: 0px;
@@ -98,9 +97,22 @@ h1 {
 .list-name {
   color: #4fc0e8;
 }
+.lists > li {
+  margin-top: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
 
 .plus-button {
   width: 150px;
+}
+.shop-image-div {
+  max-width: 500px;
+  width: 100%;
+}
+.errors {
+  color: #f14b03;
+  font-size: 12px;
 }
 /* CSS FOR THE SPOT GALLERY */
 .gallery {

@@ -2,16 +2,18 @@ function DisplaySelectedPlace({ selectedPlace }) {
   return (
     <div>
       <h2 className="place-name">{selectedPlace.displayName}</h2>
-      <div
-        className="shop-image"
-        style={{
-          backgroundImage: `url("${
-            selectedPlace.previewImageUrl
-              ? selectedPlace.previewImageUrl
-              : "/missing-place.png"
-          }")`,
-        }}
-      ></div>
+      <div className="shop-image-div">
+        <div
+          className="shop-image"
+          style={{
+            backgroundImage: `url("${
+              selectedPlace.previewImageUrl
+                ? selectedPlace.previewImageUrl
+                : "/missing-place.png"
+            }")`,
+          }}
+        ></div>
+      </div>
       <p>{selectedPlace.formatted_address}</p>
       {selectedPlace.editorialSummary && (
         <p>{selectedPlace.editorialSummary}</p>

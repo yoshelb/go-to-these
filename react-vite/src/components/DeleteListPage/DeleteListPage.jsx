@@ -50,7 +50,12 @@ function DeleteListPage() {
         <h1>Are you sure you want to delete {list.name}?</h1>
         <div className="button-div">
           <button onClick={handleDelete}>Delete</button>
-          <button onClick={() => navigate(`/lists/${list.id}`)}>Cancel</button>
+          <button
+            className="blue-button"
+            onClick={() => navigate(`/lists/${list.id}`)}
+          >
+            Cancel
+          </button>
         </div>
       </div>
     )

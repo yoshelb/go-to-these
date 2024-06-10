@@ -58,7 +58,7 @@ function ReviewMeat({ review, setEditMode }) {
         <p>{review.place.formattedAddress}</p>
         <div className="lists">
           <h3>Lists:</h3>
-          <ul>
+          <ul className="lists">
             {review.lists.length > 0 &&
               review.lists.map((list) => {
                 return (

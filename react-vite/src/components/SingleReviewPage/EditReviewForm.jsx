@@ -9,6 +9,7 @@ import { useNavigate } from "react-router-dom";
 function EditReviewForm({ review, setEditMode, setReview, listId }) {
   const [newReview, setNewReview] = useState(review.review);
   const [newRating, setNewRating] = useState(review.rating);
+  const [errors, setErrors] = useState("");
   const [isChecked, setIsChecked] = useState({});
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,6 +24,16 @@ function EditReviewForm({ review, setEditMode, setReview, listId }) {
   // SUBMIT===============
   const handleSubmit = (e) => {
     e.preventDefault();
+    let newErrorObj = {};
+    if (newRating < 1) {
+      newErrorObj.rating = "Rating between 1 and 5 is required";
+    }
+    if (newReview.length > 800) {
+      newErrorObj.review = "Review must be shorter than 800 characters";
+    }
+    if (Object.keys(newErrorObj).length > 0) {
+      return setErrors(newErrorObj);
+    }
 
     const updateReview = async () => {
       let lists = [];
@@ -67,11 +78,17 @@ function EditReviewForm({ review, setEditMode, setReview, listId }) {
   return (
     isLoaded && (
       <form onSubmit={(e) => handleSubmit(e)}>
-        <textarea
-          value={newReview}
-          onChange={(e) => setNewReview(e.target.value)}
-        ></textarea>
-        <StarsRating rating={newRating} setRating={setNewRating} />
+        <div>
+          <textarea
+            value={newReview}
+            onChange={(e) => setNewReview(e.target.value)}
+          ></textarea>
+        </div>
+        <div>
+          {errors.review && <p className="errors">{errors.review}</p>}
+          <StarsRating rating={newRating} setRating={setNewRating} />
+        </div>
+        {errors.rating && <p className="errors">{errors.rating}</p>}
         <ListCheckBoxes
           listArr={listsArr}
           checkedLists={review.lists}

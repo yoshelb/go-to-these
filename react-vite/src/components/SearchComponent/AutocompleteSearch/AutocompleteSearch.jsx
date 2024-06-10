@@ -113,7 +113,7 @@ const AutocompleteSearch = ({
         "types",
       ],
     });
-    console.log("PLACE", place);
+    // console.log("PLACE", place);
     let placeText = document.createTextNode(
       `${place.displayName}: ${place.formattedAddress}`
     );

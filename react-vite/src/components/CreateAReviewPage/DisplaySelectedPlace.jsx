@@ -1,7 +1,7 @@
 function DisplaySelectedPlace({ selectedPlace }) {
   return (
     <div>
-      <h2>{selectedPlace.displayName}</h2>
+      <h2 className="place-name">{selectedPlace.displayName}</h2>
       <div
         className="shop-image"
         style={{

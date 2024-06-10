@@ -114,9 +114,11 @@ function ListDetailPage() {
                   errors={errors}
                   list={list}
                 />
-                <button className="small-button" type="submit">
-                  Save Changes
-                </button>
+                <div>
+                  <button className="blue-button small-button" type="submit">
+                    Save Changes
+                  </button>
+                </div>
               </form>
             ) : (
               <>
@@ -129,7 +131,7 @@ function ListDetailPage() {
                 {" "}
                 {!editMode && (
                   <button
-                    className="small-button"
+                    className="blue-button small-button"
                     onClick={() => setEditMode(!editMode)}
                   >
                     Edit
@@ -155,7 +157,9 @@ function ListDetailPage() {
               {list.reviews &&
                 list.reviews
                   .sort(
-                    (a, b) => new Date(b.updated_at) - new Date(a.updated_at)
+                    (a, b) =>
+                      new Date(b.added_to_list_at) -
+                      new Date(a.added_to_list_at)
                   )
                   .map((review) => (
                     <div key={review.spot_id}>

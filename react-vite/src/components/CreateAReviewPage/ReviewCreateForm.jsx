@@ -42,13 +42,15 @@ function ReviewCreateForm({ selectedPlace, listId, setSelectedPlace }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let newError = "";
+    let newErrorObj = {};
     if (rating < 1) {
-      newError = "Rating between 1 and 5 is required";
+      newErrorObj.rating = "Rating between 1 and 5 is required";
     }
-    if (newError.length > 0) {
-      setErrors(newError);
-      return;
+    if (review.length > 800) {
+      newErrorObj.review = "Review must be shorter than 800 characters";
+    }
+    if (Object.keys(newErrorObj).length > 0) {
+      return setErrors(newErrorObj);
     }
 
     let lists = [];
@@ -99,12 +101,17 @@ function ReviewCreateForm({ selectedPlace, listId, setSelectedPlace }) {
     (alreadyReviewed === "no" ? (
       isLoaded && (
         <form onSubmit={(e) => handleSubmit(e)}>
-          <textarea
-            value={review}
-            onChange={(e) => setReview(e.target.value)}
-          ></textarea>
-          <StarsRating rating={rating} setRating={setRating} />
-          {errors && <p className="errors">{errors}</p>}
+          <div>
+            <textarea
+              value={review}
+              onChange={(e) => setReview(e.target.value)}
+            ></textarea>
+            {errors.review && <p className="errors">{errors.review}</p>}
+          </div>
+          <div>
+            <StarsRating rating={rating} setRating={setRating} />
+            {errors.rating && <p className="errors">{errors.rating}</p>}
+          </div>
           <ListCheckBoxes
             listArr={listsArr}
             checkedLists={review.lists}
@@ -112,7 +119,9 @@ function ReviewCreateForm({ selectedPlace, listId, setSelectedPlace }) {
             setIsChecked={setIsChecked}
             listId={listId}
           />
-          <button type="submit">Create Review</button>
+          <div>
+            <button type="submit">Create Review</button>
+          </div>
         </form>
       )
     ) : (

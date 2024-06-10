@@ -1,6 +1,6 @@
-import { IoIosStar, IoIosStarOutline } from "react-icons/io";
-import OpenModalButton from "../OpenModalButton";
-import DeleteReviewModal from "./DeleteReviewModal";
+
+import { TbStarFilled, TbStar } from "react-icons/tb";
+
 import { useNavigate } from "react-router-dom";
 
 function ReviewMeat({ review, setEditMode }) {
@@ -11,11 +11,31 @@ function ReviewMeat({ review, setEditMode }) {
       <div>
         <p>{review.review}</p>
         <div className="star-div">
-          {review.rating >= 1 ? <IoIosStar /> : <IoIosStarOutline />}
-          {review.rating >= 2 ? <IoIosStar /> : <IoIosStarOutline />}
-          {review.rating >= 3 ? <IoIosStar /> : <IoIosStarOutline />}
-          {review.rating >= 4 ? <IoIosStar /> : <IoIosStarOutline />}
-          {review.rating >= 5 ? <IoIosStar /> : <IoIosStarOutline />}
+          {review.rating >= 1 ? (
+            <TbStarFilled className="non-edit-star" />
+          ) : (
+            <TbStar className="non-edit-star" />
+          )}
+          {review.rating >= 2 ? (
+            <TbStarFilled className="non-edit-star" />
+          ) : (
+            <TbStar className="non-edit-star" />
+          )}
+          {review.rating >= 3 ? (
+            <TbStarFilled className="non-edit-star" />
+          ) : (
+            <TbStar className="non-edit-star" />
+          )}
+          {review.rating >= 4 ? (
+            <TbStarFilled className="non-edit-star" />
+          ) : (
+            <TbStar className="non-edit-star" />
+          )}
+          {review.rating >= 5 ? (
+            <TbStarFilled className="non-edit-star" />
+          ) : (
+            <TbStar className="non-edit-star" />
+          )}
         </div>
         {review.place.websiteUri && (
           <a
@@ -53,11 +73,12 @@ function ReviewMeat({ review, setEditMode }) {
               })}
           </ul>
         </div>
-        <button onClick={() => setEditMode(true)}>Edit</button>{" "}
-        <OpenModalButton
-          modalComponent={<DeleteReviewModal review={review} />}
-          buttonText="Delete"
-        />
+        <button className="blue-button" onClick={() => setEditMode(true)}>
+          Edit
+        </button>{" "}
+        <button onClick={() => navigate(`/reviews/${review.id}/delete`)}>
+          Delete
+        </button>
       </div>
     </div>
   );

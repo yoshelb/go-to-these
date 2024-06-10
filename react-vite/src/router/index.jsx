@@ -8,6 +8,7 @@ import SingleReviewPage from "../components/SingleReviewPage";
 import ListDetailPage from "../components/ListDetailPage/ListDetailPage.jsx";
 import NewListForm from "../components/NewListForm/NewListForm.jsx";
 import DeleteListPage from "../components/DeleteListPage/DeleteListPage.jsx";
+import DeleteReviewPage from "../components/SingleReviewPage/DeleteReviewPage.jsx";
 
 export const router = createBrowserRouter([
   {
@@ -52,6 +53,10 @@ export const router = createBrowserRouter([
       {
         path: "/login",
         element: <LoginFormPage />,
+      },
+      {
+        path: "/reviews/:reviewId/delete",
+        element: <DeleteReviewPage />,
       },
     ],
   },

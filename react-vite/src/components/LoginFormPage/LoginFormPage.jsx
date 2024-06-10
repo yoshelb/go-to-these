@@ -57,34 +57,45 @@ function LoginFormPage() {
     <>
       <h1>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Email
+        <div>
+          <div>
+            <label>Email:</label>
+          </div>
           <input
             type="text"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-        </label>
-        {errors.email && <p>{errors.email}</p>}
-        <label>
-          Password
+
+          {errors.email && <p>{errors.email}</p>}
+        </div>
+        <div>
+          <div>
+            <label>Password:</label>
+          </div>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             required
           />
-        </label>
-        {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-        <button type="button" onClick={handleDemoSubmit}>
-          Demo User
-        </button>
+
+          {errors.password && <p>{errors.password}</p>}
+        </div>
+        <div>
+          <button type="submit">Log In</button>
+          <button
+            className="blue-button"
+            type="button"
+            onClick={handleDemoSubmit}
+          >
+            Demo User
+          </button>
+        </div>
       </form>
     </>
   );
 }
 
 export default LoginFormPage;
-

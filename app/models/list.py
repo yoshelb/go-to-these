@@ -40,7 +40,14 @@ class List(db.Model):
             list_dict['user'] = self.user.to_dict() if self.user else None
 
         if(include_reviews):
-            list_dict["reviews"] = [list_review.review.to_dict(include_place=True) for list_review in self.list_review]
+            list_dict["reviews"] = list_dict["reviews"] = [
+                {
+                    **list_review.review.to_dict(include_place=True),
+                    'added_to_list_at': list_review.created_at
+                }
+                for list_review in self.list_review
+            ]
+
 
         return list_dict
 # how can I get every review back that belongs with a particular list? Maybe that's a good reason to do a join table? need to look that up.

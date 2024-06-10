@@ -14,6 +14,11 @@ li {
   margin: 40px;
   box-sizing: border-box;
 }
+form {
+  max-width: 500px;
+  grid-template-columns: 1fr;
+  gap: 100px;
+}
 
 @media (max-width: 640px) {
   .nav-div {

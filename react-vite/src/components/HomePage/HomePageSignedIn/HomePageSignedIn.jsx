@@ -6,10 +6,10 @@ import { useNavigate } from "react-router-dom";
 function HomePageSignedIn({ sessionUser }) {
   const navigate = useNavigate();
   return (
-    <main >
+    <main>
       <AllLists />
+      <h1>Spots:</h1>
       <button onClick={() => navigate("/reviews/new")}>Add a Spot</button>
-      <h2>My Spots:</h2>
       <AllReviews />
     </main>
   );

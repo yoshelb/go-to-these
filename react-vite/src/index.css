@@ -51,6 +51,15 @@ button:hover {
   font-size: 12px;
   padding: 12px;
   margin-left: 0px;
+  margin-right: 12px;
+}
+.blue-button {
+  color: #4fc0e8;
+  background-color: #f0efec;
+}
+.blue-button:hover {
+  background-color: #4fc0e8;
+  color: #f0efec;
 }
 
 .clear-location {
@@ -62,7 +71,10 @@ button:hover {
   background-color: #4fc0e8;
   color: #f0efec;
 }
-input {
+input[type="text"],
+input[type="password"] {
+  max-width: 500px;
+  width: 100%;
   font-size: 16px;
   border-radius: 22px;
   padding: 8px;
@@ -95,15 +107,55 @@ h1 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 50px;
-  grid-auto-rows: 1fr;
+  grid-auto-rows: min-content;
   margin-top: 80px;
+}
+.bottom-review-card {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}
+
+.plus-div {
+  position: relative;
+}
+.add-img-div {
+  position: absolute;
+}
+
+/* PLUS OVERLAY */
+
+.container {
+  position: relative;
+  box-sizing: border-box;
+}
+
+.overlay-div {
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  display: flex;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 26%;
+  z-index: 1;
+  align-items: center;
+  justify-content: center;
+  width: 35%;
+  height: 35%;
+}
+.plus-big {
+  width: 75%;
+}
+
+.image-list-add {
+  padding-bottom: calc(100% - 2px);
+  background-size: cover;
+  background-position: center;
+  border-radius: 2em;
 }
 
 textarea {
   width: 500px;
   height: 100px;
-  margin-top: 40px;
-  margin-bottom: 40px;
   padding: 10px;
   border-radius: 22px;
   font-family: "Lato", sans-serif;
@@ -112,23 +164,59 @@ textarea {
   color: #f14b03;
 }
 form {
+  display: grid;
   max-width: 500px;
-}
-li > a {
-  cursor: pointer;
+  grid-template-columns: 1fr;
+  row-gap: 20px;
 }
 
-li {
+li > a {
+  display: block;
+  cursor: pointer;
   padding: 10px 0 10px 0;
   box-sizing: border-box;
 }
-li:hover {
+
+li > a:hover {
   background-color: #f9c39c;
 }
 ul {
   padding: 0;
 }
+.place-name {
+  font-size: 50px;
+}
+.review-background {
+  padding: 10px;
+}
+.review-background:hover {
+  background-color: #f9c39c;
+}
 
+.add {
+  align-self: flex-start;
+}
+.sign-up-form-container {
+  row-gap: 100px;
+}
+.five-stars-div {
+  margin-bottom: 10px;
+}
+.star-div {
+  margin-bottom: 10px;
+}
+.custom-icon {
+  font-size: 50px;
+  cursor: pointer;
+  color: #898989;
+}
+.non-edit-star {
+  font-size: 40px;
+  color: #898989;
+}
+.reviewcard-star {
+  color: #898989;
+}
 @media (max-width: 640px) {
   .main-container {
     padding: 20px;
@@ -152,8 +240,12 @@ ul {
   .logo {
     width: 200px;
   }
-  li {
-    padding: 8px 0 8px 0;
+  li > a {
+    padding: 5px 0 5px 0;
     box-sizing: border-box;
+  }
+  .gallery {
+    grid-template-columns: 1fr;
+    grid-auto-rows: min-content;
   }
 }

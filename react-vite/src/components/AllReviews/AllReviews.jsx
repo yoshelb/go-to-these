@@ -53,16 +53,12 @@ function AllReviews({ listId }) {
         <div className="gallery">
           {reviewsArr &&
             reviewsArr.map((review) => (
-              <div key={review.spot_id}>
-                {listId && (
-                  <img
-                    style={{ cursor: "pointer" }}
-                    alt="plus button"
-                    className="plus-button"
-                    src="/add.png"
-                    onClick={() => handleAddToList(review.id)}
-                  ></img>
-                )}
+              <div
+                onClick={() => handleAddToList(review.id)}
+                className={listId && "review-background"}
+                key={review.spot_id}
+                style={{ cursor: "pointer" }}
+              >
                 <ReviewCard review={review} listId={listId} />
               </div>
             ))}

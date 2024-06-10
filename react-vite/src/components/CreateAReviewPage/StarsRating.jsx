@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IoIosStar, IoIosStarOutline } from "react-icons/io";
+import { TbStarFilled, TbStar } from "react-icons/tb";
 
 const StarsRating = ({ setRating, rating }) => {
   const [activeRating, setActiveRating] = useState(0);
@@ -13,10 +13,11 @@ const StarsRating = ({ setRating, rating }) => {
           onMouseLeave={() => setActiveRating(0)}
           onClick={() => setRating(num)}
         >
-          {activeRating > num - 1 || rating > num - 1 ? (
-            <IoIosStar className="custom-icon" />
+          {(activeRating > 0 && activeRating >= num) ||
+          (activeRating === 0 && rating >= num) ? (
+            <TbStarFilled className="custom-icon" />
           ) : (
-            <IoIosStarOutline className="custom-icon" />
+            <TbStar className="custom-icon" />
           )}
         </div>
       ))}

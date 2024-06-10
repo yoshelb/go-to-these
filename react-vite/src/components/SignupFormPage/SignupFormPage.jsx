@@ -70,57 +70,76 @@ function SignupFormPage() {
   return (
     <div className="signup-container">
       <h1>Sign Up</h1>
+
       {errors.server && <p>{errors.server}</p>}
       <form className="signup-form-container" onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          className="signup-input"
-          placeholder="Email"
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        {errors.email && <p style={{ color: "#FF253F" }}>{errors.email}</p>}
-        <label>Username</label>
-        <input
-          className="signup-input"
-          placeholder="Username"
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
-        {errors.username && (
-          <p style={{ color: "#FF253F" }}>{errors.username}</p>
-        )}
-        <label>Password</label>
-        <input
-          className="signup-input"
-          placeholder="Password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        {errors.password && (
-          <p style={{ color: "#FF253F" }}>{errors.password}</p>
-        )}
-        <label>Conform Password</label>
-        <input
-          className="signup-input"
-          placeholder="Confirm Password"
-          type="password"
-          value={confirmPassword}
-          onChange={(e) => setConfirmPassword(e.target.value)}
-          required
-        />
-        {errors.confirmPassword && (
-          <p style={{ color: "#FF253F" }}>{errors.confirmPassword}</p>
-        )}
-        <button id="signup-submit-button" type="submit">
-          Sign Up
-        </button>
+        <div>
+          <label>Email: </label>
+        </div>
+        <div>
+          <input
+            className="signup-input"
+            placeholder="Email"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          {errors.email && <p style={{ color: "#FF253F" }}>{errors.email}</p>}
+        </div>
+        <div>
+          <label>Username: </label>
+        </div>
+        <div>
+          <input
+            className="signup-input"
+            placeholder="Username"
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+          {errors.username && (
+            <p style={{ color: "#FF253F" }}>{errors.username}</p>
+          )}
+        </div>
+        <div>
+          <label>Password:</label>
+        </div>
+        <div>
+          <input
+            className="signup-input"
+            placeholder="Password"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          {errors.password && (
+            <p style={{ color: "#FF253F" }}>{errors.password}</p>
+          )}
+        </div>
+        <div>
+          <label>Conform Password:</label>
+        </div>
+        <div>
+          <input
+            className="signup-input"
+            placeholder="Confirm Password"
+            type="password"
+            value={confirmPassword}
+            onChange={(e) => setConfirmPassword(e.target.value)}
+            required
+          />
+          {errors.confirmPassword && (
+            <p style={{ color: "#FF253F" }}>{errors.confirmPassword}</p>
+          )}
+        </div>
+        <div>
+          <button id="signup-submit-button" type="submit">
+            Sign Up
+          </button>
+        </div>
       </form>
     </div>
   );

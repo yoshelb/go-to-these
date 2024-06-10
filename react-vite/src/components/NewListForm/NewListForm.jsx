@@ -63,11 +63,9 @@ function NewListForm() {
           description={description}
           errors={errors}
         />
-        <button
-          type="submit"
-        >
-          Create List
-        </button>
+        <div>
+          <button type="submit">Create List</button>
+        </div>
       </form>
     </div>
   ) : (

@@ -25,10 +25,10 @@ const MapsProvider = ({ children }) => {
           const { latitude, longitude } = position.coords;
           const request = {
             locationRestriction: {
-              west: longitude - 0.05,
-              north: latitude + 0.05,
-              east: longitude + 0.05,
-              south: latitude - 0.05,
+              west: longitude - 0.15,
+              north: latitude + 0.15,
+              east: longitude + 0.15,
+              south: latitude - 0.15,
             },
             origin: { lat: latitude, lng: longitude },
           };

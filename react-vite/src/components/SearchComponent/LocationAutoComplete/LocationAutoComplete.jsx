@@ -35,10 +35,10 @@ const LocationAutoComplete = ({
             const { latitude, longitude } = position.coords;
             const request = {
               locationRestriction: {
-                west: longitude - 0.05,
-                north: latitude + 0.05,
-                east: longitude + 0.05,
-                south: latitude - 0.05,
+                west: longitude - 0.15,
+                north: latitude + 0.15,
+                east: longitude + 0.15,
+                south: latitude - 0.15,
               },
               origin: { lat: latitude, lng: longitude },
             };
@@ -161,10 +161,10 @@ const LocationAutoComplete = ({
     const longitude = placeObj.location.lng;
     setSearchLocation({
       locationRestriction: {
-        west: longitude - 0.05,
-        north: latitude + 0.05,
-        east: longitude + 0.05,
-        south: latitude - 0.05,
+        west: longitude - 0.15,
+        north: latitude + 0.15,
+        east: longitude + 0.15,
+        south: latitude - 0.15,
       },
       origin: { lat: latitude, lng: longitude },
     });

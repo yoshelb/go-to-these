@@ -61,7 +61,13 @@ const AutocompleteSearch = ({
       input: "",
       region: "us",
       ...searchLocation,
-      includedPrimaryTypes: ["establishment"],
+      includedPrimaryTypes: [
+        "landmark",
+        "place_of_worship",
+        "establishment",
+        "point_of_interest",
+        "natural_feature",
+      ],
       language: "en-US",
     };
     // console.log("request from search", request);

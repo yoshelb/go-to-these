@@ -1,8 +1,8 @@
-"""changed list model
+"""added oauth
 
-Revision ID: 9cb8cc10237b
+Revision ID: cd4d4590fece
 Revises:
-Create Date: 2024-06-06 09:07:19.745659
+Create Date: 2024-06-12 16:31:44.812691
 
 """
 from alembic import op
@@ -13,7 +13,7 @@ SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '9cb8cc10237b'
+revision = 'cd4d4590fece'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -42,7 +42,7 @@ def upgrade():
     sa.Column('first_name', sa.String(length=25), nullable=True),
     sa.Column('last_name', sa.String(length=25), nullable=True),
     sa.Column('email', sa.String(length=255), nullable=False),
-    sa.Column('hashed_password', sa.String(length=255), nullable=False),
+    sa.Column('hashed_password', sa.String(length=255), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
@@ -83,6 +83,7 @@ def upgrade():
     sa.ForeignKeyConstraint(['review_id'], ['reviews.id'], ondelete='CASCADE'),
     sa.PrimaryKeyConstraint('id')
     )
+
     if environment == "production":
         op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###

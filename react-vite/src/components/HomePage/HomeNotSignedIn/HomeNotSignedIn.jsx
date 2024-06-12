@@ -15,6 +15,9 @@ function HomeNotSignedIn() {
         Login
       </button>
       <button onClick={() => navigate("/signup")}>Sign Up</button>
+      <a href={`${window.origin}/api/auth/oauth_login`}>
+        <button>Sign in with Google</button>
+      </a>
     </main>
   );
 }

@@ -43,6 +43,8 @@ ENV = os.getenv('FLASK_ENV', 'development')
 # Set the redirect URIs based on the environment
 if ENV == 'production':
     REDIRECT_URI = 'https://gotothese.onrender.com/api/auth/callback'
+    CLIENT_ID = os.getenv('PROD_GOOGLE_OAUTH_CLIENT_ID')
+    CLIENT_SECRET = os.getenv('PROD_GOOGLE_OAUTH_CLIENT_SECRET')
 else:
     REDIRECT_URI = 'http://localhost:8000/api/auth/callback'
 

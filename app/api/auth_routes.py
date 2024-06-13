@@ -35,7 +35,7 @@ Some of these values will come from our .env file.
 # Import our credentials from the .env file
 CLIENT_SECRET = os.getenv('GOOGLE_OAUTH_CLIENT_SECRET')
 CLIENT_ID = os.getenv('GOOGLE_OAUTH_CLIENT_ID')
-PROD_REDIRECT_URI = os.getenv('PROD_REDIRECT_URI')
+REDIRECT_URI = os.getenv('PROD_REDIRECT_URI')
 
 # Determine the environment
 ENV = os.getenv('FLASK_ENV', 'development')

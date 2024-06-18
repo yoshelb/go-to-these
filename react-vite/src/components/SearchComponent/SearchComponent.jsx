@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useMapsContext } from "../../context/mapsContext";
 import LocationAutoComplete from "./LocationAutoComplete";
 import AutocompleteSearch from "./AutocompleteSearch";
 import "./SearchComponent.css";
+import LocationPromptModal from "../LocationPromptModal";
 
 function SearchComponent() {
   const [previewImageUrl, setPreviewImageUrl] = useState("");
@@ -20,7 +21,13 @@ function SearchComponent() {
     setSelectedPlace,
     chosenPlace,
     setChosenPlace,
+    checkUserPermission,
   } = useMapsContext();
+  useEffect(() => {
+    if (googleMapsReady) {
+      checkUserPermission();
+    }
+  }, [locationGranted, googleMapsReady]);
 
   const handlePlaceSelected = (place) => {
     setSelectedPlace(place);
@@ -29,6 +36,7 @@ function SearchComponent() {
   return (
     googleMapsReady && (
       <div className="Search-component-main">
+        <LocationPromptModal />
         <div className="search-wrapper">
           <div className="location-div">
             <LocationAutoComplete

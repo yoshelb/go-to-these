@@ -63,7 +63,7 @@ const MapsProvider = ({ children }) => {
 
   //   Check User Location Permission =============================================================
 
-  useEffect(() => {
+    const checkUserPermission = () => {
     if (googleMapsReady) {
       console.log("GETTING LOCATION");
       if (navigator.permissions) {
@@ -127,7 +127,7 @@ const MapsProvider = ({ children }) => {
         console.log("Permissions API is not supported by this browser.");
       }
     }
-  }, [googleMapsReady]);
+  }
 
   //   LOAD GOOGLE MAPS ================================================================
   // =====================================================================================================
@@ -201,6 +201,7 @@ const MapsProvider = ({ children }) => {
         setSelectedPlace,
         chosenPlace,
         setChosenPlace,
+        checkUserPermission,
       }}
     >
       {googleMapsReady && children}

@@ -22,7 +22,7 @@ export default function Layout() {
           <Navigation />
           <div className="whole-lower-body">
             <div className="main-container">
-              <LocationPromptModal />
+              {/* <LocationPromptModal /> */}
               {isLoaded && <Outlet />}
               <Modal />
             </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 
-
 const LocationAutoComplete = ({
   setSearchLocation,
   searchLocation,
@@ -207,28 +206,32 @@ const LocationAutoComplete = ({
       )}
 
       {((currentLocation && currentLocationOn) || searchLocation) && (
-        <button
-          className="small-button clear-location"
-          onClick={() => {
-            setSearchLocation("");
-            setChosenPlace("");
-            setCurrentLocationOn(false);
-          }}
-        >
-          Clear Location
-        </button>
+        <div className="location-button">
+          <button
+            className="small-button clear-location"
+            onClick={() => {
+              setSearchLocation("");
+              setChosenPlace("");
+              setCurrentLocationOn(false);
+            }}
+          >
+            Clear Location
+          </button>
+        </div>
       )}
       {locationGranted && !currentLocationOn && (
-        <button
-          className="small-button"
-          onClick={() => {
-            setSearchLocation("");
-            setChosenPlace("");
-            setCurrentLocationOn(true);
-          }}
-        >
-          Use Current Location
-        </button>
+        <div className="location-button">
+          <button
+            className="small-button"
+            onClick={() => {
+              setSearchLocation("");
+              setChosenPlace("");
+              setCurrentLocationOn(true);
+            }}
+          >
+            Use Current Location
+          </button>
+        </div>
       )}
 
       {!currentLocationOn && !chosenPlace && (

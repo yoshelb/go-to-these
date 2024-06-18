@@ -65,6 +65,14 @@ button:hover {
   display: flex;
   column-gap: 10px;
 }
+.location-div {
+  display: flex;
+  column-gap: 10px;
+}
+.location-button {
+  display: flex;
+  align-items: center;
+}
 .blue-button {
   color: #4fc0e8;
   background-color: #f0efec;
@@ -188,6 +196,7 @@ textarea {
 }
 .current-location {
   color: #f14b03;
+  size: 30px;
 }
 form {
   display: grid;

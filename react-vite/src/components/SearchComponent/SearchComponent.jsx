@@ -36,7 +36,7 @@ function SearchComponent() {
   return (
     googleMapsReady && (
       <div className="Search-component-main">
-        <LocationPromptModal />
+        {!locationGranted && <LocationPromptModal />}
         <div className="search-wrapper">
           <div className="location-div">
             <LocationAutoComplete

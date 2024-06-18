@@ -63,7 +63,7 @@ const MapsProvider = ({ children }) => {
 
   //   Check User Location Permission =============================================================
 
-    const checkUserPermission = () => {
+  const checkUserPermission = () => {
     if (googleMapsReady) {
       console.log("GETTING LOCATION");
       if (navigator.permissions) {
@@ -85,11 +85,11 @@ const MapsProvider = ({ children }) => {
                 "This application needs access to your location. Please allow location access."
               );
             } else if (permissionStatus.state === "prompt") {
-              console.log("Geolocation permission prompt is required.");
+              // console.log("Geolocation permission prompt is required.");
               setPermissionPrompt(true);
-              alert(
-                "This application needs access to your location. Please allow location access."
-              );
+              // alert(
+              //   "This application needs access to your location. Please allow location access."
+              // );
             }
 
             // Listen for changes to the permission status
@@ -127,7 +127,7 @@ const MapsProvider = ({ children }) => {
         console.log("Permissions API is not supported by this browser.");
       }
     }
-  }
+  };
 
   //   LOAD GOOGLE MAPS ================================================================
   // =====================================================================================================

@@ -197,7 +197,7 @@ const LocationAutoComplete = ({
         </>
       ) : !currentLocationOn && searchLocation ? (
         <>
-          <h2>{chosenPlace}</h2>
+          <h2 className="chosen-place">{chosenPlace}</h2>
         </>
       ) : (
         !searchLocation && (
@@ -206,32 +206,28 @@ const LocationAutoComplete = ({
       )}
 
       {((currentLocation && currentLocationOn) || searchLocation) && (
-        <div className="location-button">
-          <button
-            className="small-button clear-location"
-            onClick={() => {
-              setSearchLocation("");
-              setChosenPlace("");
-              setCurrentLocationOn(false);
-            }}
-          >
-            Clear Location
-          </button>
-        </div>
+        <button
+          className="small-button clear-location"
+          onClick={() => {
+            setSearchLocation("");
+            setChosenPlace("");
+            setCurrentLocationOn(false);
+          }}
+        >
+          Clear Location
+        </button>
       )}
       {locationGranted && !currentLocationOn && (
-        <div className="location-button">
-          <button
-            className="small-button"
-            onClick={() => {
-              setSearchLocation("");
-              setChosenPlace("");
-              setCurrentLocationOn(true);
-            }}
-          >
-            Use Current Location
-          </button>
-        </div>
+        <button
+          className="small-button location-button"
+          onClick={() => {
+            setSearchLocation("");
+            setChosenPlace("");
+            setCurrentLocationOn(true);
+          }}
+        >
+          Use Current Location
+        </button>
       )}
 
       {!currentLocationOn && !chosenPlace && (

@@ -83,7 +83,7 @@ function LoginFormPage() {
 
           {errors.password && <p>{errors.password}</p>}
         </div>
-        <div>
+        <div className="button-div">
           <button type="submit">Log In</button>
           <button
             className="blue-button"

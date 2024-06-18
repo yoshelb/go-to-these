@@ -115,8 +115,15 @@ function ListDetailPage() {
                   list={list}
                 />
                 <div>
-                  <button className="blue-button small-button" type="submit">
+                  <button className=" small-button" type="submit">
                     Save Changes
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditMode(false)}
+                    className="blue-button small-button"
+                  >
+                    Cancel
                   </button>
                 </div>
               </form>
@@ -130,19 +137,21 @@ function ListDetailPage() {
               <>
                 {" "}
                 {!editMode && (
-                  <button
-                    className="blue-button small-button"
-                    onClick={() => setEditMode(!editMode)}
-                  >
-                    Edit
-                  </button>
+                  <>
+                    <button
+                      className="blue-button small-button"
+                      onClick={() => setEditMode(!editMode)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="small-button"
+                      onClick={() => navigate(`/lists/${list.id}/delete`)}
+                    >
+                      Delete List
+                    </button>
+                  </>
                 )}
-                <button
-                  className="small-button"
-                  onClick={() => navigate(`/lists/${list.id}/delete`)}
-                >
-                  Delete List
-                </button>
               </>
             )}
             <div className="gallery">

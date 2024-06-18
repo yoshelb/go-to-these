@@ -12,7 +12,7 @@ function LoginFormModal() {
   const [errors, setErrors] = useState({});
   const [demoSubmit, setDemoSubmit] = useState(false);
   const { closeModal } = useModal();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = useCallback(
     async (e) => {
@@ -70,10 +70,12 @@ function LoginFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
-        <button type="button" onClick={handleDemoSubmit}>
-          Demo User
-        </button>
+        <div className="button-div">
+          <button type="submit">Log In</button>
+          <button type="button" onClick={handleDemoSubmit}>
+            Demo User
+          </button>
+        </div>
       </form>
     </>
   );

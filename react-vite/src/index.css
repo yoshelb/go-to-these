@@ -5,6 +5,14 @@ body {
   margin: 0;
   padding: 0;
 }
+a {
+  text-decoration: none;
+}
+.not-signed-in-page {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+}
 .whole-lower-body {
   display: flex;
   flex-direction: column;
@@ -51,6 +59,11 @@ button:hover {
   padding: 12px;
   margin-left: 0px;
   margin-right: 12px;
+}
+
+.button-div {
+  display: flex;
+  column-gap: 10px;
 }
 .blue-button {
   color: #4fc0e8;

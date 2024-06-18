@@ -96,7 +96,7 @@ function EditReviewForm({ review, setEditMode, setReview, listId }) {
           isChecked={isChecked}
           setIsChecked={setIsChecked}
         />
-        <div>
+        <div className="button-div">
           <button type="submit">Update Review</button>
           <button
             type="button"

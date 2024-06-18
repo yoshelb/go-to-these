@@ -1,4 +1,3 @@
-
 import { TbStarFilled, TbStar } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
@@ -73,12 +72,14 @@ function ReviewMeat({ review, setEditMode }) {
               })}
           </ul>
         </div>
-        <button className="blue-button" onClick={() => setEditMode(true)}>
-          Edit
-        </button>{" "}
-        <button onClick={() => navigate(`/reviews/${review.id}/delete`)}>
-          Delete
-        </button>
+        <div className="button-div">
+          <button className="blue-button" onClick={() => setEditMode(true)}>
+            Edit
+          </button>{" "}
+          <button onClick={() => navigate(`/reviews/${review.id}/delete`)}>
+            Delete
+          </button>
+        </div>
       </div>
     </div>
   );

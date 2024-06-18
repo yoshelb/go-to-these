@@ -20,7 +20,7 @@ function AllLists() {
     listsArr &&
     isLoaded && (
       <div>
-        <h1>{sessionUser.username}&apos;s lists</h1>
+        <h1>{sessionUser.username}&apos;s lists:</h1>
         <button onClick={() => navigate("/lists/new")}>New List</button>
         <div className="lists-div">
           {listsArr &&

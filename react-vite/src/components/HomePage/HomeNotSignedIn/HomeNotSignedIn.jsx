@@ -9,7 +9,7 @@ function HomeNotSignedIn() {
         <br />
         Make lists
         <br />
-        And share them with friends
+        Share them with friends
       </h1>
       <div className="button-div">
         <button className="blue-button" onClick={() => navigate("/login")}>

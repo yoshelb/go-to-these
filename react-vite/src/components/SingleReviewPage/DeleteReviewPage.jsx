@@ -54,10 +54,11 @@ function DeleteReviewPage() {
     isLoading && (
       <div>
         <h1>
-          Are you sure you want to Delete the review for{" "}
-          {review.place.displayName}
+          Are you sure you want to remove{" "}
+          <span style={{ color: "#f14b03" }}>{review.place.displayName} </span>
+          from your spots?
         </h1>
-        <div>
+        <div className="button-div">
           <button onClick={() => handleDelete()}>Delete</button>
           <button
             className="blue-button"

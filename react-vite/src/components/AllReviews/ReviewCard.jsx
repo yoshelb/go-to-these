@@ -3,7 +3,7 @@ import "./reviewCard.css";
 
 import { TbStarFilled, TbStar } from "react-icons/tb";
 
-function ReviewCard({ review, listId }) {
+function ReviewCard({ review, listId, alreadyReviewed }) {
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -17,12 +17,14 @@ function ReviewCard({ review, listId }) {
   return (
     review && (
       <div
-        style={{ cursor: "pointer" }}
+        style={!listId ? { cursor: "pointer" } : null}
         onClick={() => (!listId ? handleNavigate() : null)}
       >
         <div className="container">
           <div
-            className={listId ? "image-list-add" : "shop-image"}
+            className={
+              listId && !alreadyReviewed ? "image-list-add" : "shop-image"
+            }
             style={{
               backgroundImage: `url("${
                 review.place.previewImage
@@ -32,16 +34,26 @@ function ReviewCard({ review, listId }) {
             }}
           ></div>
 
-          {listId && (
-            <div className="overlay-div">
-              <img
-                style={{ cursor: "pointer" }}
-                alt="plus button"
-                className="plus-big"
-                src="/plus-big.png"
-              ></img>
-            </div>
-          )}
+          {listId &&
+            (!alreadyReviewed ? (
+              <div className="overlay-div">
+                <img
+                  style={{ cursor: "pointer" }}
+                  alt="plus button"
+                  className="plus-big"
+                  src="/plus-big.png"
+                ></img>
+              </div>
+            ) : (
+              <div className="overlay-div-check-mark">
+                <img
+                  style={{ cursor: "arrow" }}
+                  alt="plus button"
+                  className="plus-big"
+                  src="/check-mark-blue.png"
+                ></img>
+              </div>
+            ))}
         </div>
 
         <h2>{review.place.displayName}</h2>

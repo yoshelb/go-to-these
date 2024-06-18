@@ -7,9 +7,10 @@ import "./allReviews.css";
 import { fetchList } from "../Utils";
 import { useNavigate } from "react-router-dom";
 
-function AllReviews({ listId }) {
+function AllReviews({ listId, listReviews }) {
   const [list, setList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [reviewIdArr, setReviewIdArr] = useState("");
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
@@ -19,6 +20,17 @@ function AllReviews({ listId }) {
   if (reviewsArr) {
     reviewsArr.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
   }
+  useEffect(() => {
+    if (listId && listReviews) {
+      if (listReviews.length > 0) {
+        const tempReviewIdsArr = [];
+        listReviews.map((review) => tempReviewIdsArr.push(review.id));
+        setReviewIdArr(tempReviewIdsArr);
+      } else {
+        setReviewIdArr(true);
+      }
+    }
+  }, [listId, listReviews]);
 
   useEffect(() => {
     console.log("USE EFTECT RUNNING");
@@ -48,23 +60,54 @@ function AllReviews({ listId }) {
 
   return (
     reviewsArr &&
-    isLoaded && (
+    isLoaded &&
+    (listId ? (
       <div>
         <div className="gallery">
-          {reviewsArr &&
-            reviewsArr.map((review) => (
-              <div
-                onClick={() => handleAddToList(review.id)}
-                className={listId && "review-background"}
-                key={review.spot_id}
-                style={{ cursor: "pointer" }}
-              >
-                <ReviewCard review={review} listId={listId} />
-              </div>
-            ))}
+          {reviewIdArr &&
+            reviewsArr.map((review) => {
+              if (reviewIdArr.includes(review.id)) {
+                return (
+                  <div
+                    className={"already-reviewed"}
+                    key={review.spot_id}
+                    style={{ cursor: "arrow" }}
+                  >
+                    {" "}
+                    <ReviewCard
+                      review={review}
+                      listId={listId}
+                      alreadyReviewed={true}
+                    />
+                  </div>
+                );
+              } else {
+                return (
+                  <div
+                    onClick={() => handleAddToList(review.id)}
+                    className={listId && "review-background"}
+                    key={review.spot_id}
+                    style={{ cursor: "pointer" }}
+                  >
+                    <ReviewCard
+                      review={review}
+                      listId={listId}
+                      alreadyReviewed={false}
+                    />
+                  </div>
+                );
+              }
+            })}
         </div>
       </div>
-    )
+    ) : (
+      <div className="gallery">
+        {reviewsArr &&
+          reviewsArr.map((review) => (
+            <ReviewCard review={review} listId={listId} />
+          ))}
+      </div>
+    ))
   );
 }
 

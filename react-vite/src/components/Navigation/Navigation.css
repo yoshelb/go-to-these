@@ -11,7 +11,7 @@ li {
 .nav-div {
   display: flex;
   justify-content: space-between;
-  margin: 40px;
+  margin: 40px 80px;
   box-sizing: border-box;
 }
 form {

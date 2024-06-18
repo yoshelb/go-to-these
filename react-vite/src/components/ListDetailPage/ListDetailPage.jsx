@@ -174,10 +174,10 @@ function ListDetailPage() {
                     <div key={review.spot_id}>
                       <ReviewCard review={review} />
                       <button
-                        className="small-button"
+                        className="small-button remove-from-list-button"
                         onClick={() => removeFromList(review.id)}
                       >
-                        Remove from list
+                        Remove
                       </button>
                     </div>
                   ))}

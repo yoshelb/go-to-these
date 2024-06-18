@@ -7,12 +7,13 @@ const LocationAutoComplete = ({
   currentLocationOn,
   setCurrentLocationOn,
   apiKey,
+  chosenPlace,
+  setChosenPlace,
 }) => {
   const inputRef = useRef(null);
   const titleRef = useRef(null);
   const resultsRef = useRef(null);
   const [currentLocation, setCurrentLocation] = useState("");
-  const [chosenPlace, setChosenPlace] = useState("");
   //    useEffect(()=> {
   //     if(!currentLocationOn) {
   //         console.log("CURRENT LOCATION OFF ====>")

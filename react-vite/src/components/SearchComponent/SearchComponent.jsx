@@ -18,6 +18,8 @@ function SearchComponent() {
     setCurrentLocation,
     selectedPlace,
     setSelectedPlace,
+    chosenPlace,
+    setChosenPlace,
   } = useMapsContext();
 
   const handlePlaceSelected = (place) => {
@@ -36,6 +38,8 @@ function SearchComponent() {
               currentLocationOn={currentLocationOn}
               setCurrentLocationOn={setCurrentLocationOn}
               apiKey={apiKey}
+              chosenPlace={chosenPlace}
+              setChosenPlace={setChosenPlace}
             />
           </div>
           <div className="auto-div">

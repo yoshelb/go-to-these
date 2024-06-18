@@ -14,6 +14,7 @@ const MapsProvider = ({ children }) => {
   const [currentLocation, setCurrentLocation] = useState("");
   const [permissionPrompt, setPermissionPrompt] = useState(false);
   const [selectedPlace, setSelectedPlace] = useState(null);
+  const [chosenPlace, setChosenPlace] = useState("");
 
   // Set User current location =================================================
 
@@ -198,6 +199,8 @@ const MapsProvider = ({ children }) => {
         getGeolocation,
         selectedPlace,
         setSelectedPlace,
+        chosenPlace,
+        setChosenPlace,
       }}
     >
       {googleMapsReady && children}

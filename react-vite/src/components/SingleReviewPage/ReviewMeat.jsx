@@ -12,29 +12,29 @@ function ReviewMeat({ review, setEditMode }) {
         <p>{review.review}</p>
         <div className="star-div">
           {review.rating >= 1 ? (
-            <TbStarFilled className="non-edit-star" />
+            <TbStarFilled className="non-edit-star blue-star" />
           ) : (
-            <TbStar className="non-edit-star" />
+            <TbStar className="non-edit-star grey-star" />
           )}
           {review.rating >= 2 ? (
-            <TbStarFilled className="non-edit-star" />
+            <TbStarFilled className="non-edit-star blue-star" />
           ) : (
-            <TbStar className="non-edit-star" />
+            <TbStar className="non-edit-star grey-star" />
           )}
           {review.rating >= 3 ? (
-            <TbStarFilled className="non-edit-star" />
+            <TbStarFilled className="non-edit-star blue-star" />
           ) : (
-            <TbStar className="non-edit-star" />
+            <TbStar className="non-edit-star grey-star" />
           )}
           {review.rating >= 4 ? (
-            <TbStarFilled className="non-edit-star" />
+            <TbStarFilled className="non-edit-star blue-star" />
           ) : (
-            <TbStar className="non-edit-star" />
+            <TbStar className="non-edit-star grey-star" />
           )}
           {review.rating >= 5 ? (
-            <TbStarFilled className="non-edit-star" />
+            <TbStarFilled className="non-edit-star blue-star" />
           ) : (
-            <TbStar className="non-edit-star" />
+            <TbStar className="non-edit-star grey-star" />
           )}
         </div>
         {review.place.websiteUri && (

@@ -15,9 +15,9 @@ const StarsRating = ({ setRating, rating }) => {
         >
           {(activeRating > 0 && activeRating >= num) ||
           (activeRating === 0 && rating >= num) ? (
-            <TbStarFilled className="custom-icon" />
+            <TbStarFilled className="custom-icon blue-star" />
           ) : (
-            <TbStar className="custom-icon" />
+            <TbStarFilled className="custom-icon grey-star" />
           )}
         </div>
       ))}

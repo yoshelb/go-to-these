@@ -48,29 +48,29 @@ function ReviewCard({ review, listId }) {
 
         <div className="star-div">
           {review.rating >= 1 ? (
-            <TbStarFilled className="reviewcard-star" />
+            <TbStarFilled className="reviewcard-star blue-star" />
           ) : (
-            <TbStar className="reviewcard-star" />
+            <TbStar className="reviewcard-star grey-star" />
           )}
           {review.rating >= 2 ? (
-            <TbStarFilled className="reviewcard-star" />
+            <TbStarFilled className="reviewcard-star blue-star" />
           ) : (
-            <TbStar className="reviewcard-star" />
+            <TbStar className="reviewcard-star grey-star" />
           )}
           {review.rating >= 3 ? (
-            <TbStarFilled className="reviewcard-star" />
+            <TbStarFilled className="reviewcard-star blue-star" />
           ) : (
-            <TbStar className="reviewcard-star" />
+            <TbStar className="reviewcard-star grey-star" />
           )}
           {review.rating >= 4 ? (
-            <TbStarFilled className="reviewcard-star" />
+            <TbStarFilled className="reviewcard-star blue-star" />
           ) : (
-            <TbStar className="reviewcard-star" />
+            <TbStar className="reviewcard-star grey-star" />
           )}
           {review.rating >= 5 ? (
-            <TbStarFilled className="reviewcard-star" />
+            <TbStarFilled className="reviewcard-star blue-star" />
           ) : (
-            <TbStar className="reviewcard-star" />
+            <TbStar className="reviewcard-star grey-star" />
           )}
         </div>
         <span>{review.review}</span>

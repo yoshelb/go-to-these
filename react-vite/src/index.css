@@ -221,15 +221,18 @@ ul {
 .custom-icon {
   font-size: 50px;
   cursor: pointer;
-  color: #898989;
+}
+.blue-star {
+  color: #4fc0e8;
+}
+
+.grey-star {
+  color: #CFCFCF;
 }
 .non-edit-star {
   font-size: 40px;
-  color: #898989;
 }
-.reviewcard-star {
-  color: #898989;
-}
+
 @media (max-width: 640px) {
   .main-container {
     padding: 20px;

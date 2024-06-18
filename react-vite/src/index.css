@@ -2,11 +2,18 @@
 body {
   font-family: "Lato", sans-serif;
   background-color: #f8f8f8;
+  color: #150D0A;
   margin: 0;
   padding: 0;
 }
 a {
   text-decoration: none;
+}
+.list-name-link {
+  color:#150D0A;
+}
+.list-name-link:hover {
+  color:#4fc0e8;
 }
 .not-signed-in-page {
   display: flex;
@@ -110,6 +117,7 @@ li {
 }
 
 h1 {
+  font-size: 50px;
   padding: 0;
 }
 .place-link {

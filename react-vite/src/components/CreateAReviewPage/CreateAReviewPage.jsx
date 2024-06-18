@@ -33,7 +33,13 @@ function CreateAReviewPage() {
   return sessionUser ? (
     <div className="main-reviewpage">
       <h1>
-        {listId ? isLoading && `Add a spot to ${list.name}` : "Find a spot"}
+        {listId
+          ? isLoading && (
+              <span>
+                Add a spot to <a className="list-name-link" href={`/lists/${list.id}`}>{list.name}</a>
+              </span>
+            )
+          : "Find a spot"}
       </h1>
       <SearchComponent />
       {selectedPlace && <DisplaySelectedPlace selectedPlace={selectedPlace} />}
@@ -45,7 +51,10 @@ function CreateAReviewPage() {
         />
       )}
       {listId && list && (
-        <AllReviews listId={listId} listReviews={list.reviews} />
+        <>
+          <h2>Your Reviewed Spots:</h2>
+          <AllReviews listId={listId} listReviews={list.reviews} />
+        </>
       )}
     </div>
   ) : (

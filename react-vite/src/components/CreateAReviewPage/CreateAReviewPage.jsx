@@ -7,7 +7,7 @@ import AllReviews from "../AllReviews";
 import ReviewCreateForm from "./ReviewCreateForm";
 import "./CreateAReviewPage.css";
 import HomeNotSignedIn from "../HomePage/HomeNotSignedIn";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, Link } from "react-router-dom";
 import { fetchList } from "../Utils";
 
 function CreateAReviewPage() {
@@ -36,7 +36,10 @@ function CreateAReviewPage() {
         {listId
           ? isLoading && (
               <span>
-                Add a spot to <a className="list-name-link" href={`/lists/${list.id}`}>{list.name}</a>
+                Add a spot to{" "}
+                <Link className="list-name-link" to={`/lists/${list.id}`}>
+                  {list.name}
+                </Link>
               </span>
             )
           : "Find a spot"}

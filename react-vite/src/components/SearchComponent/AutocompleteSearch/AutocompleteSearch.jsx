@@ -18,6 +18,7 @@ const AutocompleteSearch = ({
   const navigate = useNavigate();
 
   let token;
+  
   useEffect(() => {
     if (searchLocation) {
       setDisabled(false);

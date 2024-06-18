@@ -14,7 +14,7 @@ function CreateAReviewPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const listId = location.search.split("=")[1] || "";
-  console.log("LIST ID", listId);
+  // console.log("LIST ID", listId);
   const { selectedPlace, setSelectedPlace } = useMapsContext();
   const sessionUser = useSelector((state) => state.session.user);
   const [list, setList] = useState(null);

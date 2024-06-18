@@ -18,7 +18,7 @@ const AutocompleteSearch = ({
   const navigate = useNavigate();
 
   let token;
-  
+
   useEffect(() => {
     if (searchLocation) {
       setDisabled(false);
@@ -131,6 +131,16 @@ const AutocompleteSearch = ({
     }
 
     setSelectedPlace(placeObj);
+    if (inputRef.current) {
+      inputRef.current.value = "";
+    }
+    if (resultsRef.current) {
+      resultsRef.current.replaceChildren();
+    }
+    if (titleRef.current) {
+      titleRef.current.innerText = "";
+    }
+
     // return navigate("/reviews/new");
     return;
 

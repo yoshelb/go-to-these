@@ -131,6 +131,9 @@ h1 {
   color: #4fc0e8;
   font-size: 30px;
 }
+.lists {
+  margin-bottom: 40px;
+}
 .lists > li {
   margin-top: 10px;
   font-weight: bold;

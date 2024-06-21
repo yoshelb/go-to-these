@@ -61,43 +61,42 @@ function AllReviews({ listId, listReviews }) {
   return (
     reviewsArr &&
     isLoaded &&
-    (listId && reviewIdArr.length > 0 ? (
+    (listId ? (
       <div>
         <div className="gallery">
-          {reviewIdArr.length > 0 &&
-            reviewsArr.map((review) => {
-              if (reviewIdArr?.includes(review.id)) {
-                return (
-                  <div
-                    className={"already-reviewed"}
-                    key={review.spot_id}
-                    style={{ cursor: "arrow" }}
-                  >
-                    {" "}
-                    <ReviewCard
-                      review={review}
-                      listId={listId}
-                      alreadyReviewed={true}
-                    />
-                  </div>
-                );
-              } else {
-                return (
-                  <div
-                    onClick={() => handleAddToList(review.id)}
-                    className={listId && "review-background"}
-                    key={review.spot_id}
-                    style={{ cursor: "pointer" }}
-                  >
-                    <ReviewCard
-                      review={review}
-                      listId={listId}
-                      alreadyReviewed={false}
-                    />
-                  </div>
-                );
-              }
-            })}
+          {reviewsArr.map((review) => {
+            if (reviewIdArr.length > 0 && reviewIdArr?.includes(review.id)) {
+              return (
+                <div
+                  className={"already-reviewed"}
+                  key={review.spot_id}
+                  style={{ cursor: "arrow" }}
+                >
+                  {" "}
+                  <ReviewCard
+                    review={review}
+                    listId={listId}
+                    alreadyReviewed={true}
+                  />
+                </div>
+              );
+            } else {
+              return (
+                <div
+                  onClick={() => handleAddToList(review.id)}
+                  className={listId && "review-background"}
+                  key={review.spot_id}
+                  style={{ cursor: "pointer" }}
+                >
+                  <ReviewCard
+                    review={review}
+                    listId={listId}
+                    alreadyReviewed={false}
+                  />
+                </div>
+              );
+            }
+          })}
         </div>
       </div>
     ) : (

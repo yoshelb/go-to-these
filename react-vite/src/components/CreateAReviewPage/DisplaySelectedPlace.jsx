@@ -1,6 +1,6 @@
 function DisplaySelectedPlace({ selectedPlace }) {
   return (
-    <div>
+    <div className="search-result-div">
       <h2 className="place-name">{selectedPlace.displayName}</h2>
       <div className="shop-image-div">
         <div

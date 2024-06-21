@@ -37,6 +37,9 @@ a {
   padding: 40px 80px 40px 80px;
   box-sizing: border-box;
 }
+.search-result-div {
+  margin-bottom: 20px;
+}
 
 button {
   all: unset;

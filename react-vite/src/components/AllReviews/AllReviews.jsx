@@ -64,9 +64,9 @@ function AllReviews({ listId, listReviews }) {
     (listId ? (
       <div>
         <div className="gallery">
-          {reviewIdArr &&
+          {reviewIdArr.length > 0 &&
             reviewsArr.map((review) => {
-              if (reviewIdArr.includes(review.id)) {
+              if (reviewIdArr?.includes(review.id)) {
                 return (
                   <div
                     className={"already-reviewed"}

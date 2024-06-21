@@ -14,6 +14,9 @@ a {
   text-decoration: underline;
   text-decoration-color: #dddcd9;
 }
+.location-prompt {
+  margin: 20px 0 20px 0;
+}
 .list-name-link:hover {
   color: #4fc0e8;
   text-decoration-color: #4fc0e8;

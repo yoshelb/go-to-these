@@ -201,7 +201,11 @@ const LocationAutoComplete = ({
         </>
       ) : (
         !searchLocation && (
-          <input ref={inputRef} type="text" placeholder="Find a spot..." />
+          <input
+            ref={inputRef}
+            type="text"
+            placeholder="Choose a city to search..."
+          />
         )
       )}
 

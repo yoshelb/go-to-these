@@ -1,4 +1,5 @@
 function DisplaySelectedPlace({ selectedPlace }) {
+  console.log("SELECTED PLACE", selectedPlace);
   return (
     <div className="search-result-div">
       <h2 className="place-name">{selectedPlace.displayName}</h2>
@@ -14,7 +15,9 @@ function DisplaySelectedPlace({ selectedPlace }) {
           }}
         ></div>
       </div>
-      <p>{selectedPlace.formatted_address}</p>
+      {selectedPlace.formattedAddress && (
+        <p>{selectedPlace.formattedAddress}</p>
+      )}
       {selectedPlace.editorialSummary && (
         <p>{selectedPlace.editorialSummary}</p>
       )}

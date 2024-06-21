@@ -61,7 +61,7 @@ function AllReviews({ listId, listReviews }) {
   return (
     reviewsArr &&
     isLoaded &&
-    (listId ? (
+    (listId && reviewIdArr.length > 0 ? (
       <div>
         <div className="gallery">
           {reviewIdArr.length > 0 &&

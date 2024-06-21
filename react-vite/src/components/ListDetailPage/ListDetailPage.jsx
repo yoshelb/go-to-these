@@ -150,6 +150,10 @@ function ListDetailPage() {
                     >
                       Delete List
                     </button>
+                    {/* <button
+                      className="small-button"
+                      onClick={() => navigate(`/lists/${list.id}/public`)}
+                    ></button> */}
                   </>
                 )}
               </>

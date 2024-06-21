@@ -19,7 +19,7 @@ function CreateAReviewPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [list, setList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  console.lof("adding stuff")
+  console.log("adding stuff");
   useEffect(() => {
     setIsLoading(false);
     setSelectedPlace(null);

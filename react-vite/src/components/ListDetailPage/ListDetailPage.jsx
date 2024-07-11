@@ -11,6 +11,7 @@ import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import ShareButtons from "../ShareButtons/ShareButtons";
 import { useModal } from "../../context/Modal";
 import { LuShare } from "react-icons/lu";
+import MakeShareable from "./MakeShareable";
 
 function ListDetailPage() {
   const { closeModal } = useModal();
@@ -155,13 +156,21 @@ function ListDetailPage() {
                         buttonText={<LuShare />}
                       />
                     )}
+                    {!shareable && (
+                      <OpenModalButton
+                        className={"make-shareable-button"}
+                        modalComponent={
+                          <MakeShareable
+                            closeModal={closeModal}
+                            setEditMode={setEditMode}
+                            setShareable={setShareable}
+                          />
+                        }
+                        buttonText={<LuShare />}
+                      />
+                    )}
                   </div>
                   <p>{list.description}</p>
-                  {shareable ? (
-                    <p>Public by Link</p>
-                  ) : (
-                    <p>Not publicly shareable</p>
-                  )}
                 </>
               )}
               {sessionUser && sessionUser.id === list.user_id && (

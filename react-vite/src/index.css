@@ -331,6 +331,20 @@ ul {
   column-gap: 10px;
 }
 
+.make-shareable-button {
+  background-color: #f8f8f8;
+  color: #898989;
+  font-size: 45px;
+  padding: 10px;
+  cursor: pointer;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.make-shareable-button:hover {
+  color: #f8f8f8;
+  background-color: #898989;
+}
+
 @media (max-width: 640px) {
   .main-container {
     padding: 20px;

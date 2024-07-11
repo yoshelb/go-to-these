@@ -11,6 +11,7 @@ function NewListForm() {
   const sessionUser = useSelector((state) => state.session.user);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [shareable, setShareable] = useState(false);
   const [errors, setErrors] = useState({});
 
   const handleSubmit = (e) => {
@@ -42,6 +43,7 @@ function NewListForm() {
         body: JSON.stringify({
           name: name,
           description: description,
+          shareable_by_link: shareable,
         }),
       });
       if (response.ok) {
@@ -62,6 +64,8 @@ function NewListForm() {
           name={name}
           description={description}
           errors={errors}
+          setShareable={setShareable}
+          shareable={shareable}
         />
         <div>
           <button type="submit">Create List</button>

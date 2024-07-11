@@ -60,13 +60,13 @@ def get_list_by_id(list_id):
 def create_list():
     body = request.get_json()
 
-    new_list = List(user_id=current_user.id, name= body['name'], description=body['description'])
+    new_list = List(user_id=current_user.id, name= body['name'], description=body['description'], shareable_by_link=body['shareable_by_link'])
     if(new_list):
         db.session.add(new_list)
         db.session.commit()
         # print("NEW LIST", new_list)
         list_dict = new_list.to_dict()
-        print("LIST DICT ===========>", list_dict)
+        # print("LIST DICT ===========>", list_dict)
         return jsonify(list_dict), 200
     else:
         return jsonify("internal servor errror"), 400

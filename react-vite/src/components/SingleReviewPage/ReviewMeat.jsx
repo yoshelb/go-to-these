@@ -2,7 +2,7 @@ import { TbStarFilled, TbStar } from "react-icons/tb";
 
 import { useNavigate } from "react-router-dom";
 
-function ReviewMeat({ review, setEditMode }) {
+function ReviewMeat({ review, setEditMode, sessionUser }) {
   const navigate = useNavigate();
 
   return (
@@ -60,26 +60,35 @@ function ReviewMeat({ review, setEditMode }) {
           <ul className="lists">
             {review.lists.length > 0 &&
               review.lists.map((list) => {
-                return (
-                  <li
-                    key={review.id}
-                    style={{ cursor: "pointer" }}
-                    onClick={() => navigate(`/lists/${list.id}`)}
-                  >
-                    {list.name}
-                  </li>
-                );
+                if (
+                  (!sessionUser || sessionUser.id !== review.user_id) &&
+                  !list.shareable_by_link
+                ) {
+                  return;
+                } else {
+                  return (
+                    <li
+                      key={review.id}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => navigate(`/lists/${list.id}`)}
+                    >
+                      {list.name}
+                    </li>
+                  );
+                }
               })}
           </ul>
         </div>
-        <div className="button-div">
-          <button className="blue-button" onClick={() => setEditMode(true)}>
-            Edit
-          </button>{" "}
-          <button onClick={() => navigate(`/reviews/${review.id}/delete`)}>
-            Delete
-          </button>
-        </div>
+        {sessionUser && sessionUser.id === review.user_id && (
+          <div className="button-div">
+            <button className="blue-button" onClick={() => setEditMode(true)}>
+              Edit
+            </button>{" "}
+            <button onClick={() => navigate(`/reviews/${review.id}/delete`)}>
+              Delete
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );

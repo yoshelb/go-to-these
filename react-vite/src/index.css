@@ -93,6 +93,10 @@ button:hover {
   color: #4fc0e8;
   background-color: #f0efec;
 }
+.selected-button {
+  background-color: #4fc0e8;
+  color: #f0efec;
+}
 .blue-button:hover {
   background-color: #4fc0e8;
   color: #f0efec;

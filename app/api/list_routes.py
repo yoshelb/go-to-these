@@ -23,17 +23,34 @@ def get_all_lists():
 
 #Get List Details by LIST ID
 @list_routes.route("/<list_id>")
-@login_required
+# @login_required
 def get_list_by_id(list_id):
-    list = List.query.filter_by(user_id=current_user.id, id=list_id).options(
+    list = List.query.options(
         joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)
-    ).first()
+    ).get(list_id)
 
     if (not list):
        return jsonify("No List by that Id exists"), 404
     else:
         list_dict = list.to_dict(include_reviews=True)
-        return jsonify(list_dict), 200
+
+        if(list_dict['shareable_by_link'] == True):
+          print("SHAREABLE!!======>")
+          return jsonify(list_dict), 200
+        else:
+            print("NOT SHARE========>")
+            # if not shareble and not signed in return an error
+            if(not getattr(current_user, 'id', False)):
+                print('FALSE')
+                return jsonify({"error": "user must be logged in"}), 400
+            else:
+                print('=================> True')
+                if(list.user_id != current_user.id):
+                    return jsonify({"error": "List must belong to current user"}), 400
+                else:
+                    return jsonify(list_dict), 200
+
+
 
 
 #CREATE A LIST
@@ -80,6 +97,7 @@ def edit_list(list_id):
     list_to_update = List.query.get_or_404(list_id)
     list_to_update.name = body["name"]
     list_to_update.description = body["description"]
+    list_to_update.shareable_by_link = body["shareable_by_link"]
     db.session.add(list_to_update)
     db.session.commit()
 

@@ -1,14 +1,19 @@
-
-
-const fetchList = async (setList, setIsLoading, listId, sessionUser, navigate) => {
+const fetchList = async (
+  setList,
+  setIsLoading,
+  listId,
+  sessionUser,
+  navigate
+) => {
   try {
     const response = await fetch(`/api/lists/${listId}`);
-    if (!response.ok) {
+
+    const data = await response.json();
+    if (sessionUser && sessionUser.id == data.user_id && !response.ok) {
       throw new Error(response.error);
     }
-    const data = await response.json();
+    console.log("DATA", data);
     setList(data);
-    if (sessionUser.id != data.user_id) navigate("/");
     setIsLoading(true);
   } catch (error) {
     console.error("Error fetching review:", error);

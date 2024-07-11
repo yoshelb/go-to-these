@@ -34,18 +34,32 @@ def get_review_by_shop_id(place_id):
 #GET REVIEW BY REVIEW ID
 
 @reviews_routes.route("/<review_id>")
-@login_required
+# @login_required
 def get_review_by_reviewid(review_id):
     review = Review.query.options(joinedload(Review.place), joinedload(Review.list_review).joinedload(List_Review.list)).get(review_id)
-    print("REVIEW BEFORE DICT====> ", review)
-    if(review.user_id != current_user.id):
-       return jsonify({"error": "Review must belong to current user"}), 400
+    # if a review is found turn into a dict
     if(review):
      review_dict = review.to_dict(include_place=True, include_lists=True)
      print("REVIEW_DICT======>", review_dict)
-     return jsonify(review_dict)
     else:
      return jsonify({"error": "Could not find review"}), 400
+
+    # Check if review can be publicly shared
+    if(any(list.get('shareable_by_link') for list in review_dict['lists'])):
+       print("SHAREABLE BY LINK ===========>")
+       return jsonify(review_dict)
+    else:
+       print("NOT SHAREABLE ===================================>")
+    if(not getattr(current_user, 'id', False)):
+       print('FALSE')
+       return jsonify({"error": "user must be logged in"}), 400
+    else:
+       print('=================> True')
+       if(review.user_id != current_user.id):
+            return jsonify({"error": "Review must belong to current user"}), 400
+       else:
+        return jsonify(review_dict)
+
 
 
 #Update Review

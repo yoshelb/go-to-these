@@ -1,4 +1,12 @@
-function ListForm({ setName, setDescription, name, description, errors }) {
+function ListForm({
+  setName,
+  setDescription,
+  name,
+  description,
+  errors,
+  setShareable,
+  shareable,
+}) {
   return (
     <>
       <div>
@@ -20,6 +28,29 @@ function ListForm({ setName, setDescription, name, description, errors }) {
         {errors.description && (
           <p style={{ color: "#FF253F" }}>{errors.description}</p>
         )}
+      </div>
+      <div>
+        <p>Allow this list to be viewed publicaly by Link?</p>
+        <div>
+          <button
+            type="button"
+            className={
+              shareable ? "blue-button selected-button" : "blue-button"
+            }
+            onClick={() => setShareable(true)}
+          >
+            Yes
+          </button>
+          <button
+            className={
+              !shareable ? "blue-button selected-button" : "blue-button"
+            }
+            type="button"
+            onClick={() => setShareable(false)}
+          >
+            No
+          </button>
+        </div>
       </div>
     </>
   );

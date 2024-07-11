@@ -18,6 +18,7 @@ function ListDetailPage() {
   const dispatch = useDispatch();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
+  const [shareable, setShareable] = useState("");
   const [errors, setErrors] = useState({});
 
   // Set name and description to start as list props
@@ -25,6 +26,8 @@ function ListDetailPage() {
     if (list) {
       setName(list.name);
       setDescription(list.description);
+      setShareable(list.shareable_by_link);
+      console.log("SHAREABLE BY LINK", list.shareable_by_link);
     }
   }, [list]);
 
@@ -86,6 +89,7 @@ function ListDetailPage() {
         body: JSON.stringify({
           name: name,
           description: description,
+          shareable_by_link: shareable,
         }),
       });
       if (response.ok) {
@@ -99,99 +103,112 @@ function ListDetailPage() {
     editList();
   };
 
-  return sessionUser ? (
-    <div>
-      {isLoading && list && (
-        <div>
+  return (
+    isLoading &&
+    list &&
+    (list.shareable_by_link || sessionUser && sessionUser.id === list.user_id ? (
+      <div>
+        {
           <div>
-            {editMode ? (
-              <form onSubmit={(e) => handleEdit(e)}>
-                <ListForm
-                  setName={setName}
-                  setDescription={setDescription}
-                  name={name}
-                  description={description}
-                  errors={errors}
-                  list={list}
-                />
-                <div>
-                  <button className=" small-button" type="submit">
-                    Save Changes
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setEditMode(false)}
-                    className="blue-button small-button"
-                  >
-                    Cancel
-                  </button>
-                </div>
-              </form>
-            ) : (
-              <>
-                <h1>{list.name}</h1>
-                <p>{list.description}</p>
-              </>
-            )}
-            {sessionUser && sessionUser.id === list.user_id && (
-              <>
-                {" "}
-                {!editMode && (
-                  <>
+            <div>
+              {editMode ? (
+                <form onSubmit={(e) => handleEdit(e)}>
+                  <ListForm
+                    setName={setName}
+                    setDescription={setDescription}
+                    setShareable={setShareable}
+                    shareable={shareable}
+                    name={name}
+                    description={description}
+                    errors={errors}
+                    list={list}
+                  />
+                  <div>
+                    <button className=" small-button" type="submit">
+                      Save Changes
+                    </button>
                     <button
+                      type="button"
+                      onClick={() => setEditMode(false)}
                       className="blue-button small-button"
-                      onClick={() => setEditMode(!editMode)}
                     >
-                      Edit
+                      Cancel
                     </button>
-                    <button
-                      className="small-button"
-                      onClick={() => navigate(`/lists/${list.id}/delete`)}
-                    >
-                      Delete List
-                    </button>
-                    {/* <button
-                      className="small-button"
-                      onClick={() => navigate(`/lists/${list.id}/public`)}
-                    ></button> */}
-                  </>
-                )}
-              </>
-            )}
-            <div className="gallery">
-              <div
-                className="shop-image add"
-                onClick={() => navigate(`/reviews/new?list=${list.id}`)}
-                style={{
-                  backgroundImage: `url("/add.png")`,
-                  cursor: "pointer",
-                }}
-              ></div>
-              {list.reviews &&
-                list.reviews
-                  .sort(
-                    (a, b) =>
-                      new Date(b.added_to_list_at) -
-                      new Date(a.added_to_list_at)
-                  )
-                  .map((review) => (
-                    <div key={review.spot_id}>
-                      <ReviewCard review={review} />
+                  </div>
+                </form>
+              ) : (
+                <>
+                  <h1>{list.name}</h1>
+                  <p>{list.description}</p>
+                  {shareable ? (
+                    <p>Public by Link</p>
+                  ) : (
+                    <p>Not publicly shareable</p>
+                  )}
+                </>
+              )}
+              {sessionUser && sessionUser.id === list.user_id && (
+                <>
+                  {" "}
+                  {!editMode && (
+                    <>
                       <button
-                        className="small-button remove-from-list-button"
-                        onClick={() => removeFromList(review.id)}
+                        className="blue-button small-button"
+                        onClick={() => setEditMode(!editMode)}
                       >
-                        Remove
+                        Edit
                       </button>
-                    </div>
-                  ))}
+                      <button
+                        className="small-button"
+                        onClick={() => navigate(`/lists/${list.id}/delete`)}
+                      >
+                        Delete List
+                      </button>
+                    </>
+                  )}
+                </>
+              )}
+              <div className="gallery">
+                {sessionUser && sessionUser.id === list.user_id && (
+                  <div
+                    className="shop-image add"
+                    onClick={() => navigate(`/reviews/new?list=${list.id}`)}
+                    style={{
+                      backgroundImage: `url("/add.png")`,
+                      cursor: "pointer",
+                    }}
+                  ></div>
+                )}
+                {list.reviews &&
+                  list.reviews
+                    .sort(
+                      (a, b) =>
+                        new Date(b.added_to_list_at) -
+                        new Date(a.added_to_list_at)
+                    )
+                    .map((review) => (
+                      <div key={review.spot_id}>
+                        <ReviewCard review={review} />
+                        {sessionUser && sessionUser.id === list.user_id && (
+                          <button
+                            className="small-button remove-from-list-button"
+                            onClick={() => removeFromList(review.id)}
+                          >
+                            Remove
+                          </button>
+                        )}
+                      </div>
+                    ))}
+              </div>
             </div>
           </div>
-        </div>
-      )}
-    </div>
-  ) : (
-    <HomeNotSignedIn />
+        }
+      </div>
+    ) : (
+      <div>
+        <h1>This list is not public</h1>
+      </div>
+    ))
   );
 }
 

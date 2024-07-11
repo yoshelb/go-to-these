@@ -7,8 +7,13 @@ import { useNavigate, useParams } from "react-router-dom";
 import { fetchList } from "../Utils";
 import ListForm from "../NewListForm/ListForm";
 import { thunkUserLists } from "../../redux/lists";
+import OpenModalButton from "../OpenModalButton/OpenModalButton";
+import ShareButtons from "../ShareButtons/ShareButtons";
+import { useModal } from "../../context/Modal";
+import { LuShare } from "react-icons/lu";
 
 function ListDetailPage() {
+  const { closeModal } = useModal();
   const navigate = useNavigate();
   const { listId } = useParams(); // Extract the review ID from the URL
   const [list, setList] = useState(null);
@@ -106,7 +111,8 @@ function ListDetailPage() {
   return (
     isLoading &&
     list &&
-    (list.shareable_by_link || sessionUser && sessionUser.id === list.user_id ? (
+    (list.shareable_by_link ||
+    (sessionUser && sessionUser.id === list.user_id) ? (
       <div>
         {
           <div>
@@ -138,7 +144,18 @@ function ListDetailPage() {
                 </form>
               ) : (
                 <>
-                  <h1>{list.name}</h1>
+                  <div className="title-and-share-div">
+                    <h1>{list.name}</h1>
+                    {shareable && (
+                      <OpenModalButton
+                        className={"share-list-button"}
+                        modalComponent={
+                          <ShareButtons closeModal={closeModal} />
+                        }
+                        buttonText={<LuShare />}
+                      />
+                    )}
+                  </div>
                   <p>{list.description}</p>
                   {shareable ? (
                     <p>Public by Link</p>

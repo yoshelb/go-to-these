@@ -147,7 +147,7 @@ function ListDetailPage() {
                 <>
                   <div className="title-and-share-div">
                     <h1>{list.name}</h1>
-                    {shareable && (
+                    {list.shareable_by_link && (
                       <OpenModalButton
                         className={"share-list-button"}
                         modalComponent={
@@ -156,7 +156,7 @@ function ListDetailPage() {
                         buttonText={<LuShare />}
                       />
                     )}
-                    {!shareable && (
+                    {!list.shareable_by_link && (
                       <OpenModalButton
                         className={"make-shareable-button"}
                         modalComponent={

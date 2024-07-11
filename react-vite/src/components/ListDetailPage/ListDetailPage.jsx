@@ -63,6 +63,13 @@ function ListDetailPage() {
     removeReview();
   };
 
+  // HANDLE CANCEL ===========================
+
+  const handleCancel = () => {
+    setShareable(list.shareable_by_link);
+    setEditMode(false);
+  };
+
   // EDIT NAME AND DESCRIPTION ==================
 
   const handleEdit = (e) => {
@@ -136,7 +143,7 @@ function ListDetailPage() {
                     </button>
                     <button
                       type="button"
-                      onClick={() => setEditMode(false)}
+                      onClick={() => handleCancel()}
                       className="blue-button small-button"
                     >
                       Cancel

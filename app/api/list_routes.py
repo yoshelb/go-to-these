@@ -1,9 +1,17 @@
-from flask import Blueprint, jsonify, request, abort, make_response
+from flask import Blueprint, jsonify, request, abort, make_response, render_template, url_for
 from flask_login import login_required, current_user
 from app.models import db, Review, User, List, Place, List_Review
 from sqlalchemy.orm import joinedload
 
 list_routes = Blueprint('lists', __name__)
+
+# List of common crawler user agents
+CRAWLER_USER_AGENTS = [
+    'facebookexternalhit', 'twitterbot', 'pinterest', 'slackbot', 'googlebot', 'linkedinbot', 'applebot'
+]
+
+def is_crawler(user_agent):
+    return any(crawler in user_agent for crawler in CRAWLER_USER_AGENTS)
 
 # Get lists of Current User
 @list_routes.route("/current")
@@ -21,6 +29,38 @@ def get_all_lists():
 
      return jsonify(list_dicts), 200
 
+#Get List Preview for Crawlers =====================
+
+@list_routes.route("/<list_id>/preview")
+def get_list_preview(list_id):
+    list = List.query.options(
+        joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)
+    ).get(list_id)
+
+    if not list:
+        return jsonify("No List by that Id exists"), 404
+
+
+    if(not list_dict['shareable_by_link']):
+        preview_image =  url_for('static', filename='images/not-public.png')
+
+        return render_template('list_detail.html', list_data={
+        'title': 'List Not Public',
+        'description': 'Sorry this list is not public 😿! If someone shared this link with ask them to make it public.',
+        'image': '/',
+        'url': request.url
+    })
+
+    list_dict = list.to_dict(include_reviews=True)
+    preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else url_for('static', filename='images/default-list-img.png')
+
+    return render_template('list_detail.html', list_data={
+        'title': list_dict['name'],
+        'description': list_dict['description'],
+        'image': preview_image,
+        'url': request.url
+    })
+
 #Get List Details by LIST ID
 @list_routes.route("/<list_id>")
 # @login_required
@@ -36,7 +76,19 @@ def get_list_by_id(list_id):
 
         if(list_dict['shareable_by_link'] == True):
           print("SHAREABLE!!======>")
-          return jsonify(list_dict), 200
+           # Detect if the request is from a crawler or if the preview parameter is set
+          user_agent = request.headers.get('User-Agent', '').lower()
+          preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else url_for('static', filename='images/default-list-img.png')
+        #   If args has ?=preview or is a bot then return the preview html if not return json
+          if request.args.get('preview') == 'true' or is_crawler(user_agent):
+            return render_template('list_detail.html', list_data={
+                'title': list_dict['name'],
+                'description': list_dict['description'],
+                'image': preview_image,
+                'url': request.url
+            })
+          else:
+            return jsonify(list_dict), 200
         else:
             print("NOT SHARE========>")
             # if not shareble and not signed in return an error

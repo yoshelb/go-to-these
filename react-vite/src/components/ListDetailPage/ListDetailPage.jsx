@@ -3,7 +3,7 @@ import HomeNotSignedIn from "../HomePage/HomeNotSignedIn";
 import ReviewCard from "../AllReviews/ReviewCard";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { fetchList } from "../Utils";
 import ListForm from "../NewListForm/ListForm";
 import { thunkUserLists } from "../../redux/lists";
@@ -17,6 +17,7 @@ import { Helmet } from "react-helmet";
 function ListDetailPage() {
   const { closeModal } = useModal();
   const navigate = useNavigate();
+  const location = useLocation();
   const { listId } = useParams(); // Extract the review ID from the URL
   const [list, setList] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -36,6 +37,8 @@ function ListDetailPage() {
       setShareable(list.shareable_by_link);
     }
   }, [list]);
+
+
 
   useEffect(() => {
     setIsLoading(false);

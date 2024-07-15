@@ -93,13 +93,15 @@ def list_detail(list_id):
         joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)
     ).get(list_id)
 
+
     if not list:
         return jsonify("No List by that Id exists"), 404
 
     list_dict = list.to_dict(include_reviews=True)
+    print("LIST DICT DESCRIPTION===========>", list_dict['description'])
 
     if not list_dict['shareable_by_link']:
-        preview_image = url_for('static', filename='images/not-public.png')
+        preview_image = 'https://www.gotothese.com/not-public.png'
 
         return render_template('list-detail.html', list_data={
             'title': 'List Not Public',
@@ -108,7 +110,7 @@ def list_detail(list_id):
             'url': request.url
         })
 
-    preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else url_for('static', filename='images/default-list-img.png')
+    preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else 'https://www.gotothese.com/default-list.png'
 
     return render_template('list-detail.html', list_data={
         'title': list_dict['name'],

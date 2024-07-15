@@ -31,40 +31,13 @@ def get_all_lists():
 
 #Get List Preview for Crawlers =====================
 
-@list_routes.route("/<list_id>/preview")
-def get_list_preview(list_id):
-    list = List.query.options(
-        joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)
-    ).get(list_id)
 
-    if not list:
-        return jsonify("No List by that Id exists"), 404
-
-
-    if(not list_dict['shareable_by_link']):
-        preview_image =  url_for('static', filename='images/not-public.png')
-
-        return render_template('list_detail.html', list_data={
-        'title': 'List Not Public',
-        'description': 'Sorry this list is not public 😿! If someone shared this link with ask them to make it public.',
-        'image': '/',
-        'url': request.url
-    })
-
-    list_dict = list.to_dict(include_reviews=True)
-    preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else url_for('static', filename='images/default-list-img.png')
-
-    return render_template('list_detail.html', list_data={
-        'title': list_dict['name'],
-        'description': list_dict['description'],
-        'image': preview_image,
-        'url': request.url
-    })
 
 #Get List Details by LIST ID
 @list_routes.route("/<list_id>")
 # @login_required
 def get_list_by_id(list_id):
+    print("HITTING LIST FETCH===============")
     list = List.query.options(
         joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)
     ).get(list_id)

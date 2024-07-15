@@ -8,12 +8,6 @@
     <meta property="og:description" content="{{ list_data.description }}" />
     <meta property="og:image" content="{{ list_data.image }}" />
     <meta property="og:url" content="{{ list_data.url }}" />
-    <script>
-      // Redirect non-crawler users to the main page without the preview parameter
-      if (!navigator.userAgent.includes("bot")) {
-        window.location.replace(window.location.href.split("?")[0]);
-      }
-    </script>
   </head>
   <body>
     <div id="root"></div>

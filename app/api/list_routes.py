@@ -75,28 +75,14 @@ def get_list_by_id(list_id):
         list_dict = list.to_dict(include_reviews=True)
 
         if(list_dict['shareable_by_link'] == True):
-          print("SHAREABLE!!======>")
            # Detect if the request is from a crawler or if the preview parameter is set
-          user_agent = request.headers.get('User-Agent', '').lower()
-          preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else url_for('static', filename='images/default-list-img.png')
-        #   If args has ?=preview or is a bot then return the preview html if not return json
-          if request.args.get('preview') == 'true' or is_crawler(user_agent):
-            return render_template('list_detail.html', list_data={
-                'title': list_dict['name'],
-                'description': list_dict['description'],
-                'image': preview_image,
-                'url': request.url
-            })
-          else:
-            return jsonify(list_dict), 200
+          return jsonify(list_dict), 200
         else:
-            print("NOT SHARE========>")
             # if not shareble and not signed in return an error
             if(not getattr(current_user, 'id', False)):
                 print('FALSE')
                 return jsonify({"error": "user must be logged in"}), 400
             else:
-                print('=================> True')
                 if(list.user_id != current_user.id):
                     return jsonify({"error": "List must belong to current user"}), 400
                 else:

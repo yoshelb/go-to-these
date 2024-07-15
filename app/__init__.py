@@ -11,6 +11,10 @@ from .api.reviews_routes import reviews_routes
 from .seeds import seed_commands
 from .config import Config
 from .api.list_routes import list_routes
+from flask import jsonify, request, render_template, url_for
+from app.models import db, Review, User, List, List_Review
+from sqlalchemy.orm import joinedload
+import re
 
 app = Flask(__name__, static_folder='../react-vite/dist', static_url_path='/')
 
@@ -76,6 +80,37 @@ def api_help():
                     for rule in app.url_map.iter_rules() if rule.endpoint != 'static' }
     return route_list
 
+@app.route('/lists/<int:list_id>')
+def list_detail(list_id):
+    print("HITTING LISTS ROUTE========================>")
+    """
+    This route handles requests for specific list details.
+    """
+    list = List.query.options(joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)).get(list_id)
+
+    if not list:
+        return jsonify("No List by that Id exists"), 404
+
+    list_dict = list.to_dict(include_reviews=True)
+
+    if not list_dict['shareable_by_link']:
+        preview_image = url_for('static', filename='images/not-public.png')
+
+        return render_template('list_detail.html', list_data={
+            'title': 'List Not Public',
+            'description': 'Sorry, this list is not public 😿! If someone shared this link with you, ask them to make it public.',
+            'image': preview_image,
+            'url': request.url
+        })
+
+    preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else url_for('static', filename='images/default-list-img.png')
+
+    return render_template('list_detail.html', list_data={
+        'title': list_dict['name'],
+        'description': list_dict['description'],
+        'image': preview_image,
+        'url': request.url
+    })
 
 @app.route('/', defaults={'path': ''})
 @app.route('/<path:path>')
@@ -85,9 +120,42 @@ def react_root(path):
     react builds in the production environment for favicon
     or index.html requests
     """
+
     if path == 'favicon.ico':
         return app.send_from_directory('public', 'favicon.ico')
-    return app.send_static_file('index.html')
+
+        # Check if the path matches the pattern /lists/<list_id>
+    return "hello"
+    match = re.match(r'^lists/(\d+)$', path)
+    if match:
+        list_id = int(match.group(1))
+        list = List.query.options(joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)).get(list_id)
+
+        if not list:
+            return jsonify("No List by that Id exists"), 404
+
+        list_dict = list.to_dict(include_reviews=True)
+
+        if not list_dict['shareable_by_link']:
+            preview_image = url_for('static', filename='images/not-public.png')
+
+            return render_template('list_detail.html', list_data={
+                'title': 'List Not Public',
+                'description': 'Sorry, this list is not public 😿! If someone shared this link with you, ask them to make it public.',
+                'image': preview_image,
+                'url': request.url
+            })
+
+        preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else url_for('static', filename='images/default-list-img.png')
+
+        return render_template('list_detail.html', list_data={
+            'title': list_dict['name'],
+            'description': list_dict['description'],
+            'image': preview_image,
+            'url': request.url,
+        })
+    else:
+        return app.send_static_file('index.html')
 
 
 @app.errorhandler(404)

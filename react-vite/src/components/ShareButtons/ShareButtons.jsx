@@ -1,4 +1,4 @@
-function ShareButtons({ closeModal }) {
+function ShareButtons({ closeModal, listName, listDescription }) {
   const shareLink = () => {
     const url = window.location.href;
     navigator.clipboard
@@ -13,8 +13,8 @@ function ShareButtons({ closeModal }) {
   };
 
   const shareEmail = () => {
-    const subject = "Check out this list";
-    const body = `Check out this list of some favorite spots: ${window.location.href}`;
+    const subject = `Check out this list: ${listName}`;
+    const body = `Check out this list: ${window.location.href}. /n${listDescription}`;
     window.location.href = `mailto:?subject=${encodeURIComponent(
       subject
     )}&body=${encodeURIComponent(body)}`;
@@ -22,7 +22,7 @@ function ShareButtons({ closeModal }) {
   };
 
   const shareText = () => {
-    const message = `Check this out: ${window.location.href}`;
+    const message = `Check out this list: ${listName} ${window.location.href}`;
     window.location.href = `sms:?body=${encodeURIComponent(message)}`;
     closeModal();
   };
@@ -38,7 +38,7 @@ function ShareButtons({ closeModal }) {
 
   const shareTwitter = () => {
     const url = window.location.href;
-    const text = "Check this out!";
+    const text = `Check out this list: ${listName}`;
     window.open(
       `https://twitter.com/intent/tweet?url=${encodeURIComponent(
         url

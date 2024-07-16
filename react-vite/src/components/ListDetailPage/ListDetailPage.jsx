@@ -159,7 +159,7 @@ function ListDetailPage() {
                       <OpenModalButton
                         className={"share-list-button"}
                         modalComponent={
-                          <ShareButtons closeModal={closeModal} />
+                          <ShareButtons closeModal={closeModal} listName={list.name} listDescription={list.description}/>
                         }
                         buttonText={<LuShare />}
                       />
@@ -240,6 +240,7 @@ function ListDetailPage() {
       ) : (
         <div>
           <h1>This list is not public</h1>
+          <p>If a friend sent you this list just ask them to make it public!</p>
         </div>
       )}
     </>

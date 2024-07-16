@@ -105,12 +105,11 @@ def list_detail(list_id):
         content = file.read()
 
     if not list_dict['shareable_by_link']:
-        preview_image = 'https://www.gotothese.com/not-public.png'
 
         meta_tags = f"""
-        <meta property="og:title" content="List Not Public" />
-        <meta property="og:description" content="Sorry, this list is not public 😿! If someone shared this link with you, ask them to make it public." />
-        <meta property="og:image" content="{preview_image}" />
+        <meta property="og:title" content="Places list" />
+        <meta property="og:description" content="Check out these places" />
+        <meta property="og:image" content="https://www.gotothese.com/default-list.png" />
         <meta property="og:url" content="{request.url}" />
         """
     else:

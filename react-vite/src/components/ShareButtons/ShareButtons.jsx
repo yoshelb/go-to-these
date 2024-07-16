@@ -22,7 +22,7 @@ function ShareButtons({ closeModal, listName, listDescription }) {
   };
 
   const shareText = () => {
-    const message = `Check out this list: ${listName} ${window.location.href}`;
+    const message = `Check out this list: ${listName} ${window.location.href}/n${listDescription}`;
     window.location.href = `sms:?body=${encodeURIComponent(message)}`;
     closeModal();
   };

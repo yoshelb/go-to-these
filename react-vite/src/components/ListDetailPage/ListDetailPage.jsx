@@ -158,6 +158,7 @@ function ListDetailPage() {
                     {list.shareable_by_link && (
                       <OpenModalButton
                         className={"share-list-button"}
+                        currentUrl={location}
                         modalComponent={
                           <ShareButtons closeModal={closeModal} listName={list.name} listDescription={list.description}/>
                         }

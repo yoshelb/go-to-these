@@ -38,8 +38,6 @@ function ListDetailPage() {
     }
   }, [list]);
 
-
-
   useEffect(() => {
     setIsLoading(false);
     // Fetch the review data based on the review ID
@@ -126,16 +124,6 @@ function ListDetailPage() {
       (list.shareable_by_link ||
         (sessionUser && sessionUser.id === list.user_id)) ? (
         <div>
-          <Helmet>
-            <title>{list.name}</title>
-            <meta property="og:title" content={list.name} />
-            <meta property="og:description" content={list.description} />
-            <meta
-              property="og:image"
-              content={list.reviews[0].place.previewImage}
-            />
-            <meta property="og:url" content={window.location.href} />
-          </Helmet>
           <div>
             <div>
               {editMode ? (

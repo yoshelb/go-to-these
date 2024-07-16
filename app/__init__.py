@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, request, session, redirect, jsonify, url_for
+from flask import Flask,  Response, render_template, request, session, redirect, jsonify, url_for
 from flask_cors import CORS
 from flask_migrate import Migrate
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -93,31 +93,39 @@ def list_detail(list_id):
         joinedload(List.list_review).joinedload(List_Review.review).joinedload(Review.place)
     ).get(list_id)
 
-
     if not list:
         return jsonify("No List by that Id exists"), 404
 
     list_dict = list.to_dict(include_reviews=True)
     print("LIST DICT DESCRIPTION===========>", list_dict['description'])
 
+    file_path = os.path.join(app.static_folder, 'index.html')
+
+    with open(file_path, 'r') as file:
+        content = file.read()
+
     if not list_dict['shareable_by_link']:
         preview_image = 'https://www.gotothese.com/not-public.png'
 
-        return render_template('list-detail.html', list_data={
-            'title': 'List Not Public',
-            'description': 'Sorry, this list is not public 😿! If someone shared this link with you, ask them to make it public.',
-            'image': preview_image,
-            'url': request.url
-        })
+        meta_tags = f"""
+        <meta property="og:title" content="List Not Public" />
+        <meta property="og:description" content="Sorry, this list is not public 😿! If someone shared this link with you, ask them to make it public." />
+        <meta property="og:image" content="{preview_image}" />
+        <meta property="og:url" content="{request.url}" />
+        """
+    else:
+        preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else 'https://www.gotothese.com/default-list.png'
 
-    preview_image = list_dict['reviews'][0]['place']['previewImage'] if list_dict['reviews'] else 'https://www.gotothese.com/default-list.png'
+        meta_tags = f"""
+        <meta property="og:title" content="{list_dict['name']}" />
+        <meta property="og:description" content="{list_dict['description']}" />
+        <meta property="og:image" content="{preview_image}" />
+        <meta property="og:url" content="{request.url}" />
+        """
 
-    return render_template('list-detail.html', list_data={
-        'title': list_dict['name'],
-        'description': list_dict['description'],
-        'image': preview_image,
-        'url': request.url
-    })
+    modified_content = content.replace('</head>', f'{meta_tags}</head>')
+
+    return Response(modified_content, mimetype='text/html')
 
 
 

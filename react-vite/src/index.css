@@ -345,6 +345,11 @@ ul {
   background-color: #898989;
 }
 
+.yes-no-buttons {
+  display: flex;
+  column-gap: 10px;
+}
+
 @media (max-width: 640px) {
   .main-container {
     padding: 20px;

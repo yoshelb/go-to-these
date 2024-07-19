@@ -31,7 +31,7 @@ function ListForm({
       </div>
       <div>
         <p>Allow this list to be viewed publicaly by Link?</p>
-        <div>
+        <div className="yes-no-buttons">
           <button
             type="button"
             className={

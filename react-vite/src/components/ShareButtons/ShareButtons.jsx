@@ -13,9 +13,9 @@ function ShareButtons({ closeModal, listName, listDescription }) {
   };
 
   const shareText = () => {
-    const message = `Check out this list:${listName}\n${window.location.href}\n${listDescription}`;
+    const message = `Check out this list: ${listName}\n${window.location.href}\n${listDescription}`;
     const encodedMessage = encodeURIComponent(message)
-      .replace(/%20/g, "+")
+      .replace(/%20/g, " ")
       .replace(/%0A/g, "%0D%0A");
     window.location.href = `sms:?body=${encodedMessage}`;
     closeModal();

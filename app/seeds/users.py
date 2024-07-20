@@ -17,10 +17,13 @@ def seed_users():
 
 # Uses a raw SQL query to DELETE specific users from the users table.
 def undo_users():
+    emails = ('demo@aa.io', 'marnie@aa.io', 'bobbie@aa.io')
+
     if environment == "production":
-        # Delete specific users based on their email
-        db.session.execute(text(f"DELETE FROM {SCHEMA}.users WHERE email IN ('demo@aa.io', 'marnie@aa.io', 'bobbie@aa.io')"))
+        db.session.execute(text(f"DELETE FROM {SCHEMA}.users WHERE email IN :emails"), {'emails': emails})
     else:
-        db.session.execute(text("DELETE FROM users WHERE email IN ('demo@aa.io', 'marnie@aa.io', 'bobbie@aa.io')"))
+       # For SQLite, delete each user individually
+        for email in emails:
+            db.session.execute(text("DELETE FROM users WHERE email = :email"), {'email': email})
 
     db.session.commit()

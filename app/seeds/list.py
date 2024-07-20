@@ -19,11 +19,15 @@ def seed_lists():
     db.session.add_all(lists)
     db.session.commit()
 
+
 def undo_lists():
     demo_user = User.query.filter_by(username='Demo').first()
-    if environment == "production":
-        db.session.execute(text(f"DELETE FROM {SCHEMA}.lists WHERE user_id = :user_id"), {'user_id': demo_user.id})
-    else:
-        db.session.execute(text("DELETE FROM lists WHERE user_id = :user_id"), {'user_id': demo_user.id})
+    if demo_user:
+        if environment == "production":
+            db.session.execute(text(f"DELETE FROM {SCHEMA}.lists WHERE user_id = :user_id"), {'user_id': demo_user.id})
+        else:
+            db.session.execute(text("DELETE FROM lists WHERE user_id = :user_id"), {'user_id': demo_user.id})
 
-    db.session.commit()
+        db.session.commit()
+    else:
+        print("Demo user not found. No lists to delete.")

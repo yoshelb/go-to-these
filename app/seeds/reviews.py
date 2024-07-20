@@ -69,13 +69,15 @@ def seed_reviews():
     db.session.add_all(reviews)
     db.session.commit()
 
-def undo_reviews():
-    if environment == "production":
-        # Delete reviews based on user_id of the demo user
-        demo_user = User.query.filter_by(username='Demo').first()
-        db.session.execute(text(f"DELETE FROM {SCHEMA}.reviews WHERE user_id = :user_id"), {'user_id': demo_user.id})
-    else:
-        demo_user = User.query.filter_by(username='Demo').first()
-        db.session.execute(text("DELETE FROM reviews WHERE user_id = :user_id"), {'user_id': demo_user.id})
 
-    db.session.commit()
+def undo_reviews():
+    demo_user = User.query.filter_by(username='Demo').first()
+    if demo_user:
+        if environment == "production":
+            db.session.execute(text(f"DELETE FROM {SCHEMA}.reviews WHERE user_id = :user_id"), {'user_id': demo_user.id})
+        else:
+            db.session.execute(text("DELETE FROM reviews WHERE user_id = :user_id"), {'user_id': demo_user.id})
+
+        db.session.commit()
+    else:
+        print("Demo user not found. No reviews to delete.")

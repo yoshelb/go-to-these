@@ -1,7 +1,6 @@
 from app.models import db, List, Review, List_Review, environment, SCHEMA
 from sqlalchemy.sql import text
 
-
 def seed_list_reviews():
     coffee = List.query.filter_by(name="Great Coffee & Pastries").first()
     bars = List.query.filter_by(name="Favorite Bars").first()
@@ -103,6 +102,11 @@ def undo_list_reviews():
     if environment == "production":
         db.session.execute(text(f"DELETE FROM {SCHEMA}.list_reviews WHERE list_id IN (SELECT id FROM {SCHEMA}.lists WHERE name IN ('Great Coffee & Pastries', 'Favorite Bars', 'Fun Stuff'))"))
     else:
-        db.session.execute(text("DELETE FROM list_reviews WHERE list_id IN (SELECT id FROM lists WHERE name IN ('Great Coffee & Pastries', 'Favorite Bars', 'Fun Stuff'))"))
+        # For SQLite
+        query = """
+        DELETE FROM list_reviews
+        WHERE list_id IN (SELECT id FROM lists WHERE name IN ('Great Coffee & Pastries', 'Favorite Bars', 'Fun Stuff'))
+        """
+        db.session.execute(text(query))
 
     db.session.commit()

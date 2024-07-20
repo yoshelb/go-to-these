@@ -68,6 +68,7 @@ def seed_places():
     db.session.add_all(places)
     db.session.commit()
 
+
 def undo_places():
     place_ids = [
         'ChIJTel9dGCAhYARQGwrTfGZ07M', 'ChIJj-FdH-uAhYARIp6mvqK3HNM', 'ChIJJ5BEyYqAhYAR2Xim_Tv4XhE', 'ChIJ74VF-qaAhYARb0YeIN1ZqEA',
@@ -80,6 +81,9 @@ def undo_places():
     if environment == "production":
         db.session.execute(text(f"DELETE FROM {SCHEMA}.places WHERE id IN :ids"), {'ids': tuple(place_ids)})
     else:
-        db.session.execute(text("DELETE FROM places WHERE id IN :ids"), {'ids': tuple(place_ids)})
+        # For SQLite
+         # For SQLite, delete each place individually
+        for place_id in place_ids:
+            db.session.execute(text("DELETE FROM places WHERE id = :place_id"), {'place_id': place_id})
 
     db.session.commit()
